@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="pt-PT"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="profile" href="https://gmpg.org/xfn/11">
+<title>FAÇA UMA SENHA DIGITAL (CODE LOCK) ACIONADA POR TOC-TOCS NA PORTA – C/ PIC 12F675 (REF260) – PicSource</title>
+<link rel="dns-prefetch" href="http://www.googletagmanager.com/">
+<link rel="dns-prefetch" href="http://fonts.googleapis.com/">
+<link rel="alternate" type="application/rss+xml" title="PicSource » Feed" href="http://18.228.153.232/feed">
+<link rel="alternate" type="application/rss+xml" title="PicSource » Feed de comentários" href="http://18.228.153.232/comments/feed">
+<link rel="alternate" type="application/rss+xml" title="Feed de comentários de PicSource » FAÇA UMA SENHA DIGITAL (CODE LOCK) ACIONADA POR TOC-TOCS NA PORTA – C/ PIC 12F675 (REF260)" href="http://18.228.153.232/archives/10098/feed">
+<!-- <link rel='stylesheet' id='wp-block-library-css'  href='http://18.228.153.232/wp-includes/css/dist/block-library/style.min.css?ver=5.4.2' type='text/css' media='all' /> -->
+<!-- <link rel='stylesheet' id='wpblog-post-layouts-block-style-css'  href='http://18.228.153.232/wp-content/plugins/wp-blog-post-layouts/includes/assets/css/build.css?ver=1.0.2' type='text/css' media='all' /> -->
+<!-- <link rel='stylesheet' id='wpforo-widgets-css'  href='http://18.228.153.232/wp-content/plugins/wpforo/wpf-themes/classic/widgets.css?ver=1.7.7' type='text/css' media='all' /> -->
+<link rel="stylesheet" type="text/css" href="index_dosyalar/A.6hlei.css.pagespeed.cf.pOJ6x-XoVo.css" media="all">
+<link rel="stylesheet" id="wpblog-post-layouts-google-fonts-css" href="index_dosyalar/css_002.css" type="text/css" media="all">
+<!-- <link rel='stylesheet' id='fontawesome-css'  href='http://18.228.153.232/wp-content/plugins/wp-blog-post-layouts/includes/assets/fontawesome/css/all.min.css?ver=5.12.1' type='text/css' media='all' /> -->
+<link rel="stylesheet" type="text/css" href="index_dosyalar/6hlei.css" media="all">
+<link rel="stylesheet" id="color-blog-fonts-css" href="index_dosyalar/css.css" type="text/css" media="all">
+<!-- <link rel='stylesheet' id='font-awesome-css'  href='http://18.228.153.232/wp-content/themes/color-blog/assets/library/font-awesome/css/font-awesome.min.css?ver=4.7.0' type='text/css' media='all' /> -->
+<!-- <link rel='stylesheet' id='lightslider-style-css'  href='http://18.228.153.232/wp-content/themes/color-blog/assets/library/lightslider/css/lightslider.min.css?ver=5.4.2' type='text/css' media='all' /> -->
+<!-- <link rel='stylesheet' id='animate-css'  href='http://18.228.153.232/wp-content/themes/color-blog/assets/library/animate/animate.min.css?ver=3.5.1' type='text/css' media='all' /> -->
+<!-- <link rel='stylesheet' id='preloader-css'  href='http://18.228.153.232/wp-content/themes/color-blog/assets/css/mt-preloader.css?ver=1.0.7' type='text/css' media='all' /> -->
+<!-- <link rel='stylesheet' id='color-blog-style-css'  href='http://18.228.153.232/wp-content/themes/color-blog/style.css?ver=1.0.7' type='text/css' media='all' /> -->
+<link rel="stylesheet" type="text/css" href="index_dosyalar/6hlei_003.css" media="all">
+<style id="color-blog-style-inline-css" type="text/css">.category-button.cb-cat-99 a{background:#b2ef6b}.category-button.cb-cat-99 a:hover{background:#80bd39}#site-navigation ul li.cb-cat-99 .menu-item-description{background:#b2ef6b}#site-navigation ul li.cb-cat-99 .menu-item-description:after{border-top-color:#b2ef6b}.category-button.cb-cat-89 a{background:#ce8e5c}.category-button.cb-cat-89 a:hover{background:#9c5c2a}#site-navigation ul li.cb-cat-89 .menu-item-description{background:#ce8e5c}#site-navigation ul li.cb-cat-89 .menu-item-description:after{border-top-color:#ce8e5c}.category-button.cb-cat-156 a{background:#615fd3}.category-button.cb-cat-156 a:hover{background:#2f2da1}#site-navigation ul li.cb-cat-156 .menu-item-description{background:#615fd3}#site-navigation ul li.cb-cat-156 .menu-item-description:after{border-top-color:#615fd3}.category-button.cb-cat-158 a{background:#606cd6}.category-button.cb-cat-158 a:hover{background:#2e3aa4}#site-navigation ul li.cb-cat-158 .menu-item-description{background:#606cd6}#site-navigation ul li.cb-cat-158 .menu-item-description:after{border-top-color:#606cd6}.category-button.cb-cat-131 a{background:#bfbb56}.category-button.cb-cat-131 a:hover{background:#8d8924}#site-navigation ul li.cb-cat-131 .menu-item-description{background:#bfbb56}#site-navigation ul li.cb-cat-131 .menu-item-description:after{border-top-color:#bfbb56}.category-button.cb-cat-6 a{background:#d93}.category-button.cb-cat-6 a:hover{background:#ab6701}#site-navigation ul li.cb-cat-6 .menu-item-description{background:#d93}#site-navigation ul li.cb-cat-6 .menu-item-description:after{border-top-color:#d93}.category-button.cb-cat-15 a{background:#ee2}.category-button.cb-cat-15 a:hover{background:#bcbc00}#site-navigation ul li.cb-cat-15 .menu-item-description{background:#ee2}#site-navigation ul li.cb-cat-15 .menu-item-description:after{border-top-color:#ee2}.category-button.cb-cat-17 a{background:#3b2d1b}.category-button.cb-cat-17 a:hover{background:#090000}#site-navigation ul li.cb-cat-17 .menu-item-description{background:#3b2d1b}#site-navigation ul li.cb-cat-17 .menu-item-description:after{border-top-color:#3b2d1b}.category-button.cb-cat-133 a{background:#3b2d1b}.category-button.cb-cat-133 a:hover{background:#090000}#site-navigation ul li.cb-cat-133 .menu-item-description{background:#3b2d1b}#site-navigation ul li.cb-cat-133 .menu-item-description:after{border-top-color:#3b2d1b}.category-button.cb-cat-94 a{background:#3b2d1b}.category-button.cb-cat-94 a:hover{background:#090000}#site-navigation ul li.cb-cat-94 .menu-item-description{background:#3b2d1b}#site-navigation ul li.cb-cat-94 .menu-item-description:after{border-top-color:#3b2d1b}.category-button.cb-cat-82 a{background:#3b2d1b}.category-button.cb-cat-82 a:hover{background:#090000}#site-navigation ul li.cb-cat-82 .menu-item-description{background:#3b2d1b}#site-navigation ul li.cb-cat-82 .menu-item-description:after{border-top-color:#3b2d1b}.category-button.cb-cat-129 a{background:#3b2d1b}.category-button.cb-cat-129 a:hover{background:#090000}#site-navigation ul li.cb-cat-129 .menu-item-description{background:#3b2d1b}#site-navigation ul li.cb-cat-129 .menu-item-description:after{border-top-color:#3b2d1b}.category-button.cb-cat-127 a{background:#3b2d1b}.category-button.cb-cat-127 a:hover{background:#090000}#site-navigation ul li.cb-cat-127 .menu-item-description{background:#3b2d1b}#site-navigation ul li.cb-cat-127 .menu-item-description:after{border-top-color:#3b2d1b}.category-button.cb-cat-154 a{background:#3b2d1b}.category-button.cb-cat-154 a:hover{background:#090000}#site-navigation ul li.cb-cat-154 .menu-item-description{background:#3b2d1b}#site-navigation ul li.cb-cat-154 .menu-item-description:after{border-top-color:#3b2d1b}.category-button.cb-cat-14 a{background:#3b2d1b}.category-button.cb-cat-14 a:hover{background:#090000}#site-navigation ul li.cb-cat-14 .menu-item-description{background:#3b2d1b}#site-navigation ul li.cb-cat-14 .menu-item-description:after{border-top-color:#3b2d1b}.category-button.cb-cat-10 a{background:#3b2d1b}.category-button.cb-cat-10 a:hover{background:#090000}#site-navigation ul li.cb-cat-10 .menu-item-description{background:#3b2d1b}#site-navigation ul li.cb-cat-10 .menu-item-description:after{border-top-color:#3b2d1b}.category-button.cb-cat-11 a{background:#3b2d1b}.category-button.cb-cat-11 a:hover{background:#090000}#site-navigation ul li.cb-cat-11 .menu-item-description{background:#3b2d1b}#site-navigation ul li.cb-cat-11 .menu-item-description:after{border-top-color:#3b2d1b}.category-button.cb-cat-96 a{background:#3b2d1b}.category-button.cb-cat-96 a:hover{background:#090000}#site-navigation ul li.cb-cat-96 .menu-item-description{background:#3b2d1b}#site-navigation ul li.cb-cat-96 .menu-item-description:after{border-top-color:#3b2d1b}.category-button.cb-cat-93 a{background:#61ccd8}.category-button.cb-cat-93 a:hover{background:#2f9aa6}#site-navigation ul li.cb-cat-93 .menu-item-description{background:#61ccd8}#site-navigation ul li.cb-cat-93 .menu-item-description:after{border-top-color:#61ccd8}.category-button.cb-cat-7 a{background:#3b2d1b}.category-button.cb-cat-7 a:hover{background:#090000}#site-navigation ul li.cb-cat-7 .menu-item-description{background:#3b2d1b}#site-navigation ul li.cb-cat-7 .menu-item-description:after{border-top-color:#3b2d1b}.category-button.cb-cat-90 a{background:#3b2d1b}.category-button.cb-cat-90 a:hover{background:#090000}#site-navigation ul li.cb-cat-90 .menu-item-description{background:#3b2d1b}#site-navigation ul li.cb-cat-90 .menu-item-description:after{border-top-color:#3b2d1b}.category-button.cb-cat-5 a{background:#81d742}.category-button.cb-cat-5 a:hover{background:#4fa510}#site-navigation ul li.cb-cat-5 .menu-item-description{background:#81d742}#site-navigation ul li.cb-cat-5 .menu-item-description:after{border-top-color:#81d742}.category-button.cb-cat-2 a{background:#3b2d1b}.category-button.cb-cat-2 a:hover{background:#090000}#site-navigation ul li.cb-cat-2 .menu-item-description{background:#3b2d1b}#site-navigation ul li.cb-cat-2 .menu-item-description:after{border-top-color:#3b2d1b}.category-button.cb-cat-18 a{background:#8c4a3f}.category-button.cb-cat-18 a:hover{background:#5a180d}#site-navigation ul li.cb-cat-18 .menu-item-description{background:#8c4a3f}#site-navigation ul li.cb-cat-18 .menu-item-description:after{border-top-color:#8c4a3f}.category-button.cb-cat-3 a{background:#3b2d1b}.category-button.cb-cat-3 a:hover{background:#090000}#site-navigation ul li.cb-cat-3 .menu-item-description{background:#3b2d1b}#site-navigation ul li.cb-cat-3 .menu-item-description:after{border-top-color:#3b2d1b}.category-button.cb-cat-126 a{background:#3b2d1b}.category-button.cb-cat-126 a:hover{background:#090000}#site-navigation ul li.cb-cat-126 .menu-item-description{background:#3b2d1b}#site-navigation ul li.cb-cat-126 .menu-item-description:after{border-top-color:#3b2d1b}.category-button.cb-cat-19 a{background:#3b2d1b}.category-button.cb-cat-19 a:hover{background:#090000}#site-navigation ul li.cb-cat-19 .menu-item-description{background:#3b2d1b}#site-navigation ul li.cb-cat-19 .menu-item-description:after{border-top-color:#3b2d1b}.category-button.cb-cat-91 a{background:#3b2d1b}.category-button.cb-cat-91 a:hover{background:#090000}#site-navigation ul li.cb-cat-91 .menu-item-description{background:#3b2d1b}#site-navigation ul li.cb-cat-91 .menu-item-description:after{border-top-color:#3b2d1b}.category-button.cb-cat-95 a{background:#d15e93}.category-button.cb-cat-95 a:hover{background:#9f2c61}#site-navigation ul li.cb-cat-95 .menu-item-description{background:#d15e93}#site-navigation ul li.cb-cat-95 .menu-item-description:after{border-top-color:#d15e93}.category-button.cb-cat-124 a{background:#3b2d1b}.category-button.cb-cat-124 a:hover{background:#090000}#site-navigation ul li.cb-cat-124 .menu-item-description{background:#3b2d1b}#site-navigation ul li.cb-cat-124 .menu-item-description:after{border-top-color:#3b2d1b}.category-button.cb-cat-128 a{background:#85bc54}.category-button.cb-cat-128 a:hover{background:#538a22}#site-navigation ul li.cb-cat-128 .menu-item-description{background:#85bc54}#site-navigation ul li.cb-cat-128 .menu-item-description:after{border-top-color:#85bc54}.category-button.cb-cat-135 a{background:#1b3d2d}.category-button.cb-cat-135 a:hover{background:#000b00}#site-navigation ul li.cb-cat-135 .menu-item-description{background:#1b3d2d}#site-navigation ul li.cb-cat-135 .menu-item-description:after{border-top-color:#1b3d2d}.category-button.cb-cat-157 a{background:#8c3f89}.category-button.cb-cat-157 a:hover{background:#5a0d57}#site-navigation ul li.cb-cat-157 .menu-item-description{background:#8c3f89}#site-navigation ul li.cb-cat-157 .menu-item-description:after{border-top-color:#8c3f89}.category-button.cb-cat-215 a{background:#3b2d1b}.category-button.cb-cat-215 a:hover{background:#090000}#site-navigation ul li.cb-cat-215 .menu-item-description{background:#3b2d1b}#site-navigation ul li.cb-cat-215 .menu-item-description:after{border-top-color:#3b2d1b}.category-button.cb-cat-216 a{background:#3b2d1b}.category-button.cb-cat-216 a:hover{background:#090000}#site-navigation ul li.cb-cat-216 .menu-item-description{background:#3b2d1b}#site-navigation ul li.cb-cat-216 .menu-item-description:after{border-top-color:#3b2d1b}.category-button.cb-cat-125 a{background:#3b2d1b}.category-button.cb-cat-125 a:hover{background:#090000}#site-navigation ul li.cb-cat-125 .menu-item-description{background:#3b2d1b}#site-navigation ul li.cb-cat-125 .menu-item-description:after{border-top-color:#3b2d1b}.category-button.cb-cat-130 a{background:#3b2d1b}.category-button.cb-cat-130 a:hover{background:#090000}#site-navigation ul li.cb-cat-130 .menu-item-description{background:#3b2d1b}#site-navigation ul li.cb-cat-130 .menu-item-description:after{border-top-color:#3b2d1b}.category-button.cb-cat-122 a{background:#3b2d1b}.category-button.cb-cat-122 a:hover{background:#090000}#site-navigation ul li.cb-cat-122 .menu-item-description{background:#3b2d1b}#site-navigation ul li.cb-cat-122 .menu-item-description:after{border-top-color:#3b2d1b}.category-button.cb-cat-1 a{background:#3b2d1b}.category-button.cb-cat-1 a:hover{background:#090000}#site-navigation ul li.cb-cat-1 .menu-item-description{background:#3b2d1b}#site-navigation ul li.cb-cat-1 .menu-item-description:after{border-top-color:#3b2d1b}.category-button.cb-cat-132 a{background:#8224e3}.category-button.cb-cat-132 a:hover{background:#5000b1}#site-navigation ul li.cb-cat-132 .menu-item-description{background:#8224e3}#site-navigation ul li.cb-cat-132 .menu-item-description:after{border-top-color:#8224e3}.category-button.cb-cat-12 a{background:#3b2d1b}.category-button.cb-cat-12 a:hover{background:#090000}#site-navigation ul li.cb-cat-12 .menu-item-description{background:#3b2d1b}#site-navigation ul li.cb-cat-12 .menu-item-description:after{border-top-color:#3b2d1b}.category-button.cb-cat-16 a{background:#3b2d1b}.category-button.cb-cat-16 a:hover{background:#090000}#site-navigation ul li.cb-cat-16 .menu-item-description{background:#3b2d1b}#site-navigation ul li.cb-cat-16 .menu-item-description:after{border-top-color:#3b2d1b}.category-button.cb-cat-134 a{background:#3b2d1b}.category-button.cb-cat-134 a:hover{background:#090000}#site-navigation ul li.cb-cat-134 .menu-item-description{background:#3b2d1b}#site-navigation ul li.cb-cat-134 .menu-item-description:after{border-top-color:#3b2d1b}.category-button.cb-cat-146 a{background:#303b6b}.category-button.cb-cat-146 a:hover{background:#000939}#site-navigation ul li.cb-cat-146 .menu-item-description{background:#303b6b}#site-navigation ul li.cb-cat-146 .menu-item-description:after{border-top-color:#303b6b}.category-button.cb-cat-8 a{background:#3b2d1b}.category-button.cb-cat-8 a:hover{background:#090000}#site-navigation ul li.cb-cat-8 .menu-item-description{background:#3b2d1b}#site-navigation ul li.cb-cat-8 .menu-item-description:after{border-top-color:#3b2d1b}.category-button.cb-cat-92 a{background:#3b2d1b}.category-button.cb-cat-92 a:hover{background:#090000}#site-navigation ul li.cb-cat-92 .menu-item-description{background:#3b2d1b}#site-navigation ul li.cb-cat-92 .menu-item-description:after{border-top-color:#3b2d1b}.category-button.cb-cat-4 a{background:#3b2d1b}.category-button.cb-cat-4 a:hover{background:#090000}#site-navigation ul li.cb-cat-4 .menu-item-description{background:#3b2d1b}#site-navigation ul li.cb-cat-4 .menu-item-description:after{border-top-color:#3b2d1b}.category-button.cb-cat-9 a{background:#3b2d1b}.category-button.cb-cat-9 a:hover{background:#090000}#site-navigation ul li.cb-cat-9 .menu-item-description{background:#3b2d1b}#site-navigation ul li.cb-cat-9 .menu-item-description:after{border-top-color:#3b2d1b}a,a:hover,a:focus,a:active,.entry-cat .cat-links a:hover,.entry-cat a:hover,.entry-footer a:hover,.comment-author .fn .url:hover,.commentmetadata .comment-edit-link,#cancel-comment-reply-link,#cancel-comment-reply-link:before,.logged-in-as a,.widget a:hover,.widget a:hover::before,.widget li:hover::before,.mt-social-icon-wrap li a:hover,#site-navigation ul li:hover>a,#site-navigation ul li.current-menu-item>a,#site-navigation ul li.current_page_ancestor>a,#site-navigation ul li.current_page_item>a,.banner-sub-title,.entry-title a:hover,.cat-links a:hover,.entry-footer .mt-readmore-btn:hover,.btn-wrapper a:hover,.mt-readmore-btn:hover,.navigation.pagination .nav-links .page-numbers.current,.navigation.pagination .nav-links a.page-numbers:hover,#footer-menu li a:hover,.color_blog_latest_posts .mt-post-title a:hover,#mt-scrollup:hover,.menu-toggle:hover,#top-navigation ul li a:hover,.mt-search-icon:hover,.entry-meta a:hover,.front-slider-block .banner-title a:hover,.post-info-wrap .entry-meta a:hover,.single .mt-single-related-posts .entry-title a:hover,.breadcrumbs .trail-items li a:hover,.wrap-label i,.has-thumbnail .post-info-wrap .entry-title a:hover,.front-slider-block .post-info-wrap .entry-title a:hover{color:#ffb300}.widget_search .search-submit,.widget_search .search-submit:hover,.navigation.pagination .nav-links .page-numbers.current,.navigation.pagination .nav-links a.page-numbers:hover,.error-404.not-found,.color_blog_social_media a:hover,.custom-header{border-color:#ffb300}.front-slider-block .lSAction>a:hover,.top-featured-post-wrap .post-thumbnail .post-number,.post-cats-list a,#site-navigation .menu-item-description,article .post-thumbnail::before,#secondary .widget .widget-title::before,.mt-related-post-title::before,#colophon .widget .widget-title::before,.features-post-title::before,.mt-menu-search .mt-form-wrap .search-form .search-submit{background:#ffb300}.edit-link .post-edit-link,.reply .comment-reply-link,.widget_search .search-submit,.mt-menu-search .mt-form-wrap .search-form .search-submit:hover,article.sticky::before{background:#ffb300}</style>
+<!-- <link rel='stylesheet' id='color-blog-responsive-style-css'  href='http://18.228.153.232/wp-content/themes/color-blog/assets/css/mt-responsive.css?ver=1.0.7' type='text/css' media='all' /> -->
+<!-- <link rel='stylesheet' id='jquery-lazyloadxt-spinner-css-css'  href='//18.228.153.232/wp-content/plugins/a3-lazy-load/assets/css/jquery.lazyloadxt.spinner.css?ver=5.4.2' type='text/css' media='all' /> -->
+<!-- <link rel='stylesheet' id='wpforo-dynamic-style-css'  href='http://18.228.153.232/wp-content/plugins/wpforo/wpf-themes/classic/colors.css?ver=1.7.7.310d38ccc81a0df2a20a48b0c92a464f' type='text/css' media='all' /> -->
+<script src="index_dosyalar/6hlei.js" type="text/javascript"></script>
+<!-- <script type='text/javascript' src='http://18.228.153.232/wp-includes/js/jquery/jquery.js?ver=1.12.4-wp'></script> -->
+<!-- <script type='text/javascript' src='http://18.228.153.232/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script> -->
+<script type="text/javascript" src="index_dosyalar/google-analytics_analytics.js"></script>
+<script type="text/javascript">window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','UA-145360433-2',{"anonymize_ip":true});</script>
+<link rel="https://api.w.org/" href="http://18.228.153.232/wp-json/">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://18.228.153.232/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://18.228.153.232/wp-includes/wlwmanifest.xml"> 
+<link rel="prev" title="GERANDO NOTAS MUSICAIS  COM ACIONAMENTO BASEADO EM ULTRASSOM – C/ PIC 16F628A (REF259)" href="http://18.228.153.232/archives/10080">
+<link rel="next" title="REPETOC – REPETIDOR DE TOC-TOC (DIDÁTICO) – C/ PIC 12F675 (REF261)" href="http://18.228.153.232/archives/10116">
+<meta name="generator" content="WordPress 5.4.2">
+<link rel="canonical" href="http://18.228.153.232/archives/10098">
+<link rel="shortlink" href="http://18.228.153.232/?p=10098">
+<link rel="alternate" type="application/json+oembed" href="http://18.228.153.232/wp-json/oembed/1.0/embed?url=http%3A%2F%2F18.228.153.232%2Farchives%2F10098">
+<link rel="alternate" type="text/xml+oembed" href="http://18.228.153.232/wp-json/oembed/1.0/embed?url=http%3A%2F%2F18.228.153.232%2Farchives%2F10098&amp;format=xml">
+<meta name="generator" content="Site Kit by Google 1.11.1"><script type="text/javascript">window._wp_rp_static_base_url='https://wprp.sovrn.com/static/';window._wp_rp_wp_ajax_url="http://18.228.153.232/wp-admin/admin-ajax.php";window._wp_rp_plugin_version='3.6.4';window._wp_rp_post_id='10098';window._wp_rp_num_rel_posts='3';window._wp_rp_thumbnails=true;window._wp_rp_post_title='FA%C3%87A+UMA+SENHA+DIGITAL+%28CODE+LOCK%29+ACIONADA+POR+TOC-TOCS+NA+PORTA+-+C%2F+PIC+12F675+%28REF260%29';window._wp_rp_post_tags=['senha+eletronica+%28code+lock%29','miscel%C3%A2nea','recreativos','microcontroladores','os','ao','visa','na','disco','foi','de','faa','como','el','em','pic','uma','digit','code'];window._wp_rp_promoted_content=true;</script>
+<!-- <link rel="stylesheet" href="http://18.228.153.232/wp-content/plugins/wordpress-23-related-posts-plugin/static/themes/pinterest.css?version=3.6.4" /> -->
+<link rel="stylesheet" type="text/css" href="index_dosyalar/6hlei_002.css" media="all">
+<meta name="google-site-verification" content="yWVO0cPYihJSh0y3kVjHmNQccUXqrrLPfkMxRUYsUqg"><style type="text/css" id="custom-background-css">
+body.custom-background { background-image: url(""); background-position: left top; background-size: cover; background-repeat: no-repeat; background-attachment: fixed; }
+</style>
+</head>
+<body class="post-template-default single single-post postid-10098 single-format-standard custom-background site-layout--boxed right-sidebar wpf-default wpft-">
+<div id="preloader-background" style="display: none;">
+<div class="preloader-wrapper">
+<div class="sk-spinner sk-spinner-pulse"></div>
+</div><!-- .preloader-wrapper -->
+</div><!-- #preloader-background -->
+<div id="page" class="site">
+<a class="skip-link screen-reader-text" href="#content">Skip To Content</a>
+<div id="top-header" class="top-header-wrap mt-clearfix"><div class="mt-container">		<div class="top-header-nav">
+<nav itemscope="" id="top-navigation" class="main-navigation">
+</nav><!-- #site-navigation -->
+</div><!-- .top-header-nav -->
+</div><!-- mt-container --></div><!-- #top-header --><header id="masthead" class="site-header"><div class="mt-logo-row-wrapper mt-clearfix">		<div class="logo-ads-wrap">
+<div class="mt-container">
+<div class="site-branding">
+<p class="site-title"><a href="http://18.228.153.232/" rel="home">PicSource</a></p>
+</div><!-- .site-branding -->
+<div class="header-widget-wrapper">
+</div>
+</div> <!-- mt-container -->
+</div><!-- .logo-ads-wrap -->
+<div id="sticky-wrapper" class="sticky-wrapper is-sticky" style="height: 61px;"><div class="mt-social-menu-wrapper" style="width: 1360px; position: fixed; top: 0px;"><div class="mt-container">		<div class="menu-toggle"><a href="javascript:void(0)"><i class="fa fa-navicon"></i>Menu</a></div>
+<nav itemscope="" id="site-navigation" class="main-navigation">
+<div class="menu-microcontroladores-container"><ul id="primary-menu" class="menu nav-menu" aria-expanded="false"><li id="menu-item-9303" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-9303"><a href="http://18.228.153.232/">Home</a></li>
+<li id="menu-item-9307" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-has-children menu-item-9307 cb-cat-18"><a href="http://18.228.153.232/archives/category/microcontroladores">Microcontroladores</a><a href="javascript:void(0);" class="sub-toggle"><i class="fa fa-angle-right"></i></a>
+<ul class="sub-menu">
+<li id="menu-item-9308" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-9308 cb-cat-99"><a href="http://18.228.153.232/archives/category/microcontroladores/alarmes-microcontroladores">Alarmes</a></li>
+<li id="menu-item-9309" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-9309 cb-cat-89"><a href="http://18.228.153.232/archives/category/microcontroladores/aparelhos-de-medicao">Aparelhos de Medição</a><a href="javascript:void(0);" class="sub-toggle"><i class="fa fa-angle-right"></i></a>
+<ul class="sub-menu">
+<li id="menu-item-9310" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-9310 cb-cat-133"><a href="http://18.228.153.232/archives/category/microcontroladores/aparelhos-de-medicao/capacimetro">Capacímetro</a></li>
+<li id="menu-item-9311" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-9311 cb-cat-93"><a href="http://18.228.153.232/archives/category/microcontroladores/aparelhos-de-medicao/frequencimetro">Frequencimetro</a></li>
+<li id="menu-item-9312" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-9312 cb-cat-90"><a href="http://18.228.153.232/archives/category/microcontroladores/aparelhos-de-medicao/indutimetrocapacimetro">Indutimetro/Capacimetro</a></li>
+<li id="menu-item-9313" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-9313 cb-cat-91"><a href="http://18.228.153.232/archives/category/microcontroladores/aparelhos-de-medicao/ohmeter">Ohmeter</a></li>
+<li id="menu-item-9314" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-9314 cb-cat-92"><a href="http://18.228.153.232/archives/category/microcontroladores/aparelhos-de-medicao/voltimetro-aparelhos-de-medicao">Voltimetro</a></li>
+</ul>
+</li>
+<li id="menu-item-9315" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-9315 cb-cat-131"><a href="http://18.228.153.232/archives/category/microcontroladores/automotiva">Automotiva</a></li>
+<li id="menu-item-9316" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-9316 cb-cat-94"><a href="http://18.228.153.232/archives/category/microcontroladores/cerca-eletrica">Cerca Elétrica</a></li>
+<li id="menu-item-9317" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-9317 cb-cat-82"><a href="http://18.228.153.232/archives/category/microcontroladores/controle-remoto">Controle Remoto</a><a href="javascript:void(0);" class="sub-toggle"><i class="fa fa-angle-right"></i></a>
+<ul class="sub-menu">
+<li id="menu-item-9318" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-9318 cb-cat-129"><a href="http://18.228.153.232/archives/category/microcontroladores/controle-remoto-infravermelho">Controle Remoto Infravermelho</a></li>
+<li id="menu-item-9319" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-9319 cb-cat-127"><a href="http://18.228.153.232/archives/category/microcontroladores/controle-remoto-pwm">Controle Remoto PWM</a></li>
+</ul>
+</li>
+<li id="menu-item-9320" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-9320 cb-cat-96"><a href="http://18.228.153.232/archives/category/microcontroladores/esquemas">Esquemas</a></li>
+<li id="menu-item-9321" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-has-children menu-item-9321 cb-cat-126"><a href="http://18.228.153.232/archives/category/microcontroladores/miscelanea">Miscelânea</a><a href="javascript:void(0);" class="sub-toggle"><i class="fa fa-angle-right"></i></a>
+<ul class="sub-menu">
+<li id="menu-item-9305" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9305"><a href="http://18.228.153.232/portfolio">Outros</a></li>
+</ul>
+</li>
+<li id="menu-item-9322" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-9322 cb-cat-95"><a href="http://18.228.153.232/archives/category/microcontroladores/placa-para-portao-automatico">Placa p/ Portão Automático</a></li>
+<li id="menu-item-9323" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-9323 cb-cat-124"><a href="http://18.228.153.232/archives/category/microcontroladores/programadores-hardware">Programadores (Hardware)</a></li>
+<li id="menu-item-9324" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-9324 cb-cat-128"><a href="http://18.228.153.232/archives/category/microcontroladores/programa-em-c">Programas PIC (Compiler CCS “C”)</a></li>
+<li id="menu-item-9325" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-9325 cb-cat-135"><a href="http://18.228.153.232/archives/category/microcontroladores/programas-pic-c-xc8">Programas PIC (Compiler XC8 )<span class="menu-item-description">Faça programas usando XC8 compiler gratuito.</span></a></li>
+<li id="menu-item-9327" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-9327 cb-cat-130"><a href="http://18.228.153.232/archives/category/microcontroladores/recreativos">Recreativos</a></li>
+<li id="menu-item-9329" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-9329 cb-cat-132"><a href="http://18.228.153.232/archives/category/microcontroladores/senha-code-lock">Senha Eletronica (Code Lock)</a></li>
+<li id="menu-item-9328" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-9328 cb-cat-122"><a href="http://18.228.153.232/archives/category/microcontroladores/relogios">Relógios</a></li>
+</ul>
+</li>
+<li id="menu-item-9326" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-9326 cb-cat-125"><a href="http://18.228.153.232/archives/category/microcontroladores/projetos-de-leitores">Projetos de Leitores</a></li>
+<li id="menu-item-10941" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10941"><a href="http://18.228.153.232/community">Fórum</a></li>
+</ul></div>		</nav><!-- #site-navigation -->
+<div class="mt-social-search-wrapper">		<div class="mt-menu-search">
+<div class="mt-search-icon"><a href="javascript:void(0)">Search<i class="fa fa-search"></i></a></div>
+<div class="mt-form-wrap">
+<form role="search" method="get" class="search-form" action="http://18.228.153.232/">
+<label>
+<span class="screen-reader-text">Pesquisar por:</span>
+<input type="search" class="search-field" placeholder="Pesquisar …" name="s">
+</label>
+<input type="submit" class="search-submit" value="Pesquisar">
+</form>				<div class="mt-form-close"><a href="javascript:void(0)"><i class="fa fa-close"></i></a></div>
+</div><!-- .mt-form-wrap -->
+</div><!-- .mt-menu-search -->
+</div><!-- .mt-social-search-wrapper --></div><!--.mt-container --></div></div><!--.mt-social-menu-wrapper --></div><!--.mt-logo-row-wrapper --></header><!-- #masthead -->		<div class="custom-header no-bg-img">
+<div class="mt-container">
+<h1 class="entry-title">FAÇA UMA SENHA DIGITAL (CODE LOCK) ACIONADA POR TOC-TOCS NA PORTA – C/ PIC 12F675 (REF260)</h1>		<nav id="breadcrumb" class="mt-breadcrumb">
+<div role="navigation" aria-label="Breadcrumbs" class="breadcrumb-trail breadcrumbs" itemprop="breadcrumb"><div class="mt-container"><ul class="trail-items" itemscope="" itemtype="http://schema.org/BreadcrumbList"><meta name="numberOfItems" content="2"><meta name="itemListOrder" content="Ascending"><li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem" class="trail-item trail-begin"><a href="http://18.228.153.232/" rel="home" itemprop="item"><span itemprop="name">Home</span></a><meta itemprop="position" content="1"></li><li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem" class="trail-item trail-end"><span itemprop="item"><span itemprop="name">FAÇA UMA SENHA DIGITAL (CODE LOCK) ACIONADA POR TOC-TOCS NA PORTA – C/ PIC 12F675 (REF260)</span></span><meta itemprop="position" content="2"></li></ul></div></div>		</nav>
+</div><!-- .mt-container -->
+</div><!-- .custom-header -->
+<div id="content" class="site-content">
+<div class="mt-container">
+<div itemscope="" id="primary" class="content-area">
+<main id="main" class="site-main">
+<article id="post-10098" class="has-thumbnail post-10098 post type-post status-publish format-standard has-post-thumbnail hentry category-microcontroladores category-miscelanea category-recreativos category-senha-code-lock">
+<div class="post-thumbnail">
+<script data-pagespeed-no-defer="">//<![CDATA[
+(function(){for(var g="function"==typeof Object.defineProperties?Object.defineProperty:function(b,c,a){if(a.get||a.set)throw new TypeError("ES3 does not support getters and setters.");b!=Array.prototype&&b!=Object.prototype&&(b[c]=a.value)},h="undefined"!=typeof window&&window===this?this:"undefined"!=typeof global&&null!=global?global:this,k=["String","prototype","repeat"],l=0;l<k.length-1;l++){var m=k[l];m in h||(h[m]={});h=h[m]}var n=k[k.length-1],p=h[n],q=p?p:function(b){var c;if(null==this)throw new TypeError("The 'this' value for String.prototype.repeat must not be null or undefined");c=this+"";if(0>b||1342177279<b)throw new RangeError("Invalid count value");b|=0;for(var a="";b;)if(b&1&&(a+=c),b>>>=1)c+=c;return a};q!=p&&null!=q&&g(h,n,{configurable:!0,writable:!0,value:q});var t=this;function u(b,c){var a=b.split("."),d=t;a[0]in d||!d.execScript||d.execScript("var "+a[0]);for(var e;a.length&&(e=a.shift());)a.length||void 0===c?d[e]?d=d[e]:d=d[e]={}:d[e]=c};function v(b){var c=b.length;if(0<c){for(var a=Array(c),d=0;d<c;d++)a[d]=b[d];return a}return[]};function w(b){var c=window;if(c.addEventListener)c.addEventListener("load",b,!1);else if(c.attachEvent)c.attachEvent("onload",b);else{var a=c.onload;c.onload=function(){b.call(this);a&&a.call(this)}}};var x;function y(b,c,a,d,e){this.h=b;this.j=c;this.l=a;this.f=e;this.g={height:window.innerHeight||document.documentElement.clientHeight||document.body.clientHeight,width:window.innerWidth||document.documentElement.clientWidth||document.body.clientWidth};this.i=d;this.b={};this.a=[];this.c={}}function z(b,c){var a,d,e=c.getAttribute("data-pagespeed-url-hash");if(a=e&&!(e in b.c))if(0>=c.offsetWidth&&0>=c.offsetHeight)a=!1;else{d=c.getBoundingClientRect();var f=document.body;a=d.top+("pageYOffset"in window?window.pageYOffset:(document.documentElement||f.parentNode||f).scrollTop);d=d.left+("pageXOffset"in window?window.pageXOffset:(document.documentElement||f.parentNode||f).scrollLeft);f=a.toString()+","+d;b.b.hasOwnProperty(f)?a=!1:(b.b[f]=!0,a=a<=b.g.height&&d<=b.g.width)}a&&(b.a.push(e),b.c[e]=!0)}y.prototype.checkImageForCriticality=function(b){b.getBoundingClientRect&&z(this,b)};u("pagespeed.CriticalImages.checkImageForCriticality",function(b){x.checkImageForCriticality(b)});u("pagespeed.CriticalImages.checkCriticalImages",function(){A(x)});function A(b){b.b={};for(var c=["IMG","INPUT"],a=[],d=0;d<c.length;++d)a=a.concat(v(document.getElementsByTagName(c[d])));if(a.length&&a[0].getBoundingClientRect){for(d=0;c=a[d];++d)z(b,c);a="oh="+b.l;b.f&&(a+="&n="+b.f);if(c=!!b.a.length)for(a+="&ci="+encodeURIComponent(b.a[0]),d=1;d<b.a.length;++d){var e=","+encodeURIComponent(b.a[d]);131072>=a.length+e.length&&(a+=e)}b.i&&(e="&rd="+encodeURIComponent(JSON.stringify(B())),131072>=a.length+e.length&&(a+=e),c=!0);C=a;if(c){d=b.h;b=b.j;var f;if(window.XMLHttpRequest)f=new XMLHttpRequest;else if(window.ActiveXObject)try{f=new ActiveXObject("Msxml2.XMLHTTP")}catch(r){try{f=new ActiveXObject("Microsoft.XMLHTTP")}catch(D){}}f&&(f.open("POST",d+(-1==d.indexOf("?")?"?":"&")+"url="+encodeURIComponent(b)),f.setRequestHeader("Content-Type","application/x-www-form-urlencoded"),f.send(a))}}}function B(){var b={},c;c=document.getElementsByTagName("IMG");if(!c.length)return{};var a=c[0];if(!("naturalWidth"in a&&"naturalHeight"in a))return{};for(var d=0;a=c[d];++d){var e=a.getAttribute("data-pagespeed-url-hash");e&&(!(e in b)&&0<a.width&&0<a.height&&0<a.naturalWidth&&0<a.naturalHeight||e in b&&a.width>=b[e].o&&a.height>=b[e].m)&&(b[e]={rw:a.width,rh:a.height,ow:a.naturalWidth,oh:a.naturalHeight})}return b}var C="";u("pagespeed.CriticalImages.getBeaconData",function(){return C});u("pagespeed.CriticalImages.Run",function(b,c,a,d,e,f){var r=new y(b,c,a,e,f);x=r;d&&w(function(){window.setTimeout(function(){A(r)},0)})});})();pagespeed.CriticalImages.Run('/mod_pagespeed_beacon','http://18.228.153.232/archives/10098','8Xxa2XQLv9',true,false,'LAQJXMLhZmA');
+//]]></script><img src="index_dosyalar/xTOC_TOC3.jpg.pagespeed.ic.VjN_TLKYaW.jpg" data-lazy-type="image" data-src="http://18.228.153.232/wp-content/photos/2016/11/xTOC_TOC3.jpg.pagespeed.ic.VjN_TLKYaW.webp" class="attachment-full size-full wp-post-image lazy-loaded" alt="" srcset="index_dosyalar/TOC_TOC3.jpg 692w, index_dosyalar/TOC_TOC3-300x204.jpg 300w, index_dosyalar/TOC_TOC3-150x102.jpg 150w" data-srcset="" sizes="(max-width: 692px) 100vw, 692px" data-pagespeed-url-hash="3447713811" onload="pagespeed.CriticalImages.checkImageForCriticality(this);" width="692" height="471"><noscript><img width="692" height="471" src="http://18.228.153.232/wp-content/photos/2016/11/xTOC_TOC3.jpg.pagespeed.ic.VjN_TLKYaW.webp" class="attachment-full size-full wp-post-image" alt="" srcset="http://18.228.153.232/wp-content/photos/2016/11/xTOC_TOC3.jpg.pagespeed.ic.VjN_TLKYaW.webp 692w, http://18.228.153.232/wp-content/photos/2016/11/xTOC_TOC3-300x204.jpg.pagespeed.ic.F_mbk-TM_F.webp 300w, http://18.228.153.232/wp-content/photos/2016/11/xTOC_TOC3-150x102.jpg.pagespeed.ic.4JDBjIJSz1.webp 150w" sizes="(max-width: 692px) 100vw, 692px" data-pagespeed-url-hash="2138669016"/></noscript>		<div class="post-info-wrap">
+<div class="post-cat">			<div class="post-cats-list">
+<span class="category-button cb-cat-18"><a href="http://18.228.153.232/archives/category/microcontroladores">Microcontroladores</a></span>
+<span class="category-button cb-cat-126"><a href="http://18.228.153.232/archives/category/microcontroladores/miscelanea">Miscelânea</a></span>
+<span class="category-button cb-cat-130"><a href="http://18.228.153.232/archives/category/microcontroladores/recreativos">Recreativos</a></span>
+<span class="category-button cb-cat-132"><a href="http://18.228.153.232/archives/category/microcontroladores/senha-code-lock">Senha Eletronica (Code Lock)</a></span>
+</div><!-- .post-cats-list --></div>
+<div class="entry-meta"> 
+<span class="posted-on"><a href="http://18.228.153.232/archives/10098" rel="bookmark"><time class="entry-date published" datetime="2016-11-21T11:53:27-03:00">21 de Novembro de 2016</time><time class="updated" datetime="2017-08-07T13:25:31-03:00">7 de Agosto de 2017</time></a></span><span class="byline"> <span class="author vcard"><a class="url fn n" href="http://18.228.153.232/archives/author/clarios">Claudio Larios</a></span></span> 
+</div>
+<h3 class="entry-title"><a href="http://18.228.153.232/archives/10098" rel="bookmark">FAÇA UMA SENHA DIGITAL (CODE LOCK) ACIONADA POR TOC-TOCS NA PORTA – C/ PIC 12F675 (REF260)</a></h3>	    </div><!--.post-info-wrap -->
+</div><!-- .post-thumbnail -->
+<div class="entry-content">
+<p>Deixe que simples ‘toc-tocs’ na porta sejam sua chave de acesso…<span id="more-10098"></span></p>
+<p>Bater na porta para chamar alguém é muito comum. Mas fazer os 
+toc-tocs abrirem a porta por meio de uma fechadura elétrica: isto não é 
+muito comum. Esta proposta visa justamente isto, de forma experimental. 
+Veja como é simples o esquema, olhando abaixo:</p>
+<p><a href="http://picsource.com.br/wp-content/photos/2016/11/senha_toc_toc.gif"><img src="http://picsource.com.br/wp-content/photos/2016/11/senha_toc_toc-1024x702.gif" data-lazy-type="image" data-src="http://picsource.com.br/wp-content/photos/2016/11/senha_toc_toc-1024x702.gif" alt="senha_toc_toc" class="aligncenter size-large wp-image-10099 lazy-loaded" srcset="http://18.228.153.232/wp-content/photos/2016/11/senha_toc_toc-1024x702.gif 1024w, http://18.228.153.232/wp-content/photos/2016/11/senha_toc_toc-300x206.gif 300w, http://18.228.153.232/wp-content/photos/2016/11/senha_toc_toc-768x527.gif 768w, http://18.228.153.232/wp-content/photos/2016/11/senha_toc_toc-150x103.gif 150w" data-srcset="" sizes="(max-width: 730px) 100vw, 730px" data-pagespeed-url-hash="3447713811" onload="pagespeed.CriticalImages.checkImageForCriticality(this);" width="730" height="500"><noscript><img src="http://picsource.com.br/wp-content/photos/2016/11/senha_toc_toc-1024x702.gif" alt="senha_toc_toc" width="730" height="500" class="aligncenter size-large wp-image-10099" srcset="http://18.228.153.232/wp-content/photos/2016/11/senha_toc_toc-1024x702.gif 1024w, http://18.228.153.232/wp-content/photos/2016/11/senha_toc_toc-300x206.gif 300w, http://18.228.153.232/wp-content/photos/2016/11/xsenha_toc_toc-768x527.gif.pagespeed.ic.AICtPk9LjV.png 768w, http://18.228.153.232/wp-content/photos/2016/11/xsenha_toc_toc-150x103.gif.pagespeed.ic.7AjXoyVIqC.png 150w" sizes="(max-width: 730px) 100vw, 730px" data-pagespeed-url-hash="3506533252"/></noscript></a></p>
+<p>O microcontrolador usado é um PIC12F75 de apenas 8 pinos, mais do que
+ suficiente para esta montagem. Para capturar os sons da batida na porta
+ (toc-toc) usamos um simples disco piezoelétrico. Ele é fácil de ser 
+encontrado e barato, sendo fabricado em vários tamanhos. Nesta montagem 
+foi usado um de 20 mm de diâmetro. Quando ele recebe vibrações mecânicas
+ em sua superfície, estas são transformadas em corrente elétrica. O PIC 
+detecta esta pequena tensão gerada ao bater na porta usando o conversor 
+analógico/digital interno, no canal 2 (an2).<br>
+O programa que roda no PIC detecta e conta o tempo entre as batidas que 
+formarão a ‘senha toc-toc’. Esta informação é gravada na EEprom interna e
+ depois é usada para comparar com os acessos feitos pelo usuário. Quando
+ se introduz a senha correta, então temos a abertura da porta por meio 
+do acionamento de um relé cujos contatos ligarão uma fechadura elétrica 
+comercial. O tempo de acionamento está ajustado para 5 segundos, podendo
+ ser alterado no programa. Caso prefira o modo retenção ao invés de 
+pulso, pode também ser alterado no programa através de um define.<br>
+Os leds não precisarão ficar visíveis na porta, mas são úteis na hora de
+ programar a senha e realizar testes de funcionamento. Em uma montagem 
+definitiva, estes poderão ser montados na própria placa de circuito 
+impresso.<br>
+Monte o circuito e depois programe o PIC com o arquivo hex fornecido na pasta da montagem, no final deste artigo.<br>
+Antes de usar terá que primeiro programar a senha. Os passos são estes:<br>
+Ligue a alimentação de 5 volts no circuito. Aperte o botão ‘sw_gravar’ no pino 7. Deverá acender o led ‘gravar’ no pino 3.<br>
+Introduza a senha batendo na porta em uma sequência que possa se lembrar
+ depois. Logo no primeiro toc na porta, o led ‘op’ acende, indicando 
+inicio de uma tentativa de acesso. Ao acabar de introduzir a seja 
+escolhida, espere o led ‘gravar’ se apagar e também o led ‘op’.<br>
+Entre com a senha para confirmar que a gravação foi correta. É 
+importante dar as batidas no tempo certo e quantidade corretas, 
+similares a que foi gravada. O programa permite uma tolerância nos 
+tempos, mas é relativamente pequena.<br>
+Pode ser gravada senha com o máximo de 20 batidas. No entanto, senhas 
+longas são muito difíceis de serem repetidas no tempo certo. Portanto, 
+opte por uma com 5 ou 6 batidas. O tempo máximo entre uma batida e outra
+ não pode ser superior a 3 segundos.<br>
+Usando um fonte de alimentação de 12 volts para 2 Amperes, podemos 
+acionar uma fechadura comercial de tensão 12 volts. A partir dela fica 
+fácil reduzir para os 5 volts da montagem usando um circuito integrado 
+7805.<br>
+Obs. Esta montagem é experimental, sendo de caráter didático, montada 
+apenas em placa experimental (do tipo “Breadboard”), sujeita a “bugs” 
+ainda não detectados. Está sendo fornecido os arquivos para que cada 
+hobista possa alterar o programa segundo suas necessidades.</p>
+<p>Segue pasta zipada com os arquivos da montagem:</p>
+<p><a href="http://picsource.com.br/wp-content/photos/2016/11/SENHA_TOC_TOC.zip">SENHA_TOC_TOC</a></p>
+<p>Segue abaixo um vídeo caseiro com a montagem no Breadboard:</p>
+<div style="width: 320px;" class="wp-video"><!--[if lt IE 9]><script>document.createElement('video');</script><![endif]-->
+<video class="wp-video-shortcode" id="video-10098-1" preload="metadata" controls="controls" width="320" height="240"><source class="lazy lazy-hidden" type="video/x-flv" src="index_dosyalar/senha_toc_toc.flv"><a href="http://picsource.com.br/wp-content/photos/2016/11/senha_toc_toc.flv">http://picsource.com.br/wp-content/photos/2016/11/senha_toc_toc.flv</a></video></div>
+<p>Manuais:<br>
+<a href="https://www.google.com.br/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=1&amp;cad=rja&amp;uact=8&amp;ved=0ahUKEwjgquqI_4vMAhUGj5AKHR0-AZMQFggpMAA&amp;url=http%3A%2F%2Fww1.microchip.com%2Fdownloads%2Fen%2Fdevicedoc%2F41190c.pdf&amp;usg=AFQjCNHDvRQqZCdCzvGXgTMIGOpXZ0fFOw">PIC 12F675</a><br>
+<a href="https://pt.wikipedia.org/wiki/Piezoeletricidade">Piezoelétrico</a></p>
+<p>Curiosidades:<br>
+<a href="http://wol.jw.org/pt/wol/d/r5/lp-t/102014048#h=1:0-8:80">A lanterna do vaga-lume</a><br>
+<a href="http://wol.jw.org/pt/wol/d/r5/lp-t/102005532?q=terremotos&amp;p=par">Os desastres naturais e o fator humano</a><br>
+<a href="http://wol.jw.org/pt/wol/d/r5/lp-t/102002726?q=fome&amp;p=par">A Grande Fome na Irlanda — Uma epopéia de morte e emigração</a><br>
+<a href="http://wol.jw.org/pt/wol/d/r5/lp-t/102004765?q=mar&amp;p=par">Uma batalha contínua contra as águas </a><br>
+<a href="http://wol.jw.org/pt/wol/d/r5/lp-t/1102010345?q=dna&amp;p=par">De onde vieram as instruções?</a></p>
+<p>Outros assuntos:<br>
+<a href="https://www.jw.org/pt/publicacoes/revistas/despertai-n1-2017-fevereiro/como-mostrar-que-valoriza-seu-conjuge/">Como mostrar que valoriza seu cônjuge</a><br>
+<a href="https://www.jw.org/pt/ensinos-biblicos/familia/adolescentes/perguntam/controlar-a-ansiedade/">Como controlar a ansiedade?</a><br>
+<a href="https://www.jw.org/pt/ensinos-biblicos/familia/adolescentes/perguntam/pressao-para-ser-gay/">Sinto atração por pessoas do mesmo sexo — será que sou gay?</a><br>
+<a href="https://www.jw.org/pt/ensinos-biblicos/familia/adolescentes/perguntam/abuso-sexual-cuidados/">O que eu preciso saber sobre abuso sexual? — Parte 1: Que cuidados tomar</a><br>
+<a href="https://www.jw.org/pt/ensinos-biblicos/familia/adolescentes/perguntam/abuso-sexual-como-se-recuperar/">O que eu preciso saber sobre abuso sexual? — Parte 2: Como se recuperar</a><br>
+<a href="https://www.jw.org/pt/ensinos-biblicos/familia/adolescentes/perguntam/odeio-a-escola/">O que fazer se eu odeio a escola?</a><br>
+<a href="https://www.jw.org/pt/ensinos-biblicos/familia/adolescentes/perguntam/professor-dificil-de-agradar/">Como posso me dar bem com meu professor?</a></p>
+<p>Vídeos:<br>
+<a href="https://www.jw.org/pt/ensinos-biblicos/familia/adolescentes/animacoes-no-quadro-branco/enfrente-bullying-sem-briga/">Como enfrentar o bullying sem partir para a briga </a><br>
+<a href="https://www.jw.org/pt/publicacoes/livros/boas-noticias-deus-voce/boas-noticias-de-deus-biblia/video-quem-autor-biblia/">Quem é o Autor da Bíblia?</a><br>
+<a href="https://www.jw.org/pt/ensinos-biblicos/familia/adolescentes/animacoes-no-quadro-branco/amor-de-verdade-ou-paixao/">Será que é amor ou paixão?</a><br>
+<a href="https://www.jw.org/pt/ensinos-biblicos/familia/criancas/torne-se-amigo-de-jeova/videos/tenha-paciencia/">Tenha mais paciência</a><br>
+<a href="https://www.jw.org/pt/ensinos-biblicos/familia/criancas/torne-se-amigo-de-jeova/videos/fale-a-verdade/">Fale a verdade</a><br>
+<a href="https://www.jw.org/pt/testemunhas-de-jeova/atividades/principios-biblicos-em-acao/deixei-igreja-encontrei-deus/">Eu me cansei das religiões</a></p>
+<p>Até o próximo artigo!</p>
+<div class="wp_rp_wrap  wp_rp_pinterest" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">Artigos Relacionados</h3><ul class="related_post wp_rp"><li class="wp_rp_related_post_column wp_rp_special"><ul><li class="undefined" data-post-type="none" data-position="0" data-poid="in-12430"><a href="http://18.228.153.232/archives/12430" class="wp_rp_thumbnail"><img class="lazy-hidden" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-type="image" data-src="http://18.228.153.232/wp-content/photos/2020/05/xDIGITAL_DEDO_ROXO-150x95.png.pagespeed.ic.TRz29oAowU.webp" alt="FECHADURA ELETRÔNICA BIOMÉTRICA – C/ PIC 16F628A E SENSOR DY50 (REF335)" data-pagespeed-url-hash="3447713811" onload="pagespeed.CriticalImages.checkImageForCriticality(this);" width="150"><noscript><img src="http://18.228.153.232/wp-content/photos/2020/05/xDIGITAL_DEDO_ROXO-150x95.png.pagespeed.ic.TRz29oAowU.webp" alt="FECHADURA ELETRÔNICA BIOMÉTRICA &#8211; C/ PIC 16F628A E SENSOR DY50 (REF335)" width="150" data-pagespeed-url-hash="1476630139"/></noscript></a><a href="http://18.228.153.232/archives/12430" class="wp_rp_title">FECHADURA ELETRÔNICA BIOMÉTRICA – C/ PIC 16F628A E SENSOR DY50 (REF335)</a></li></ul></li><li class="wp_rp_related_post_column wp_rp_special"><ul><li class="undefined" data-post-type="none" data-position="1" data-poid="in-3694"><a href="http://18.228.153.232/archives/3694" class="wp_rp_thumbnail"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-type="image" data-src="http://18.228.153.232/wp-content/photos/2013/06/penta_cadeado-300x208.jpg" class="lazy-hidden attachment-150x0 size-150x0 wp-post-image" alt="" srcset="" data-srcset="http://18.228.153.232/wp-content/photos/2013/06/penta_cadeado-300x208.jpg 300w, http://18.228.153.232/wp-content/photos/2013/06/penta_cadeado-768x533.jpg 768w, http://18.228.153.232/wp-content/photos/2013/06/penta_cadeado-1024x711.jpg 1024w, http://18.228.153.232/wp-content/photos/2013/06/penta_cadeado.jpg 1086w" sizes="(max-width: 150px) 100vw, 150px" data-pagespeed-url-hash="3447713811" onload="pagespeed.CriticalImages.checkImageForCriticality(this);" width="150" height="104"><noscript><img width="150" height="104" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-type="image" data-src="http://18.228.153.232/wp-content/photos/2013/06/penta_cadeado-300x208.jpg" class="lazy lazy-hidden attachment-150x0 size-150x0 wp-post-image" alt="" srcset="" data-srcset="http://18.228.153.232/wp-content/photos/2013/06/penta_cadeado-300x208.jpg 300w, http://18.228.153.232/wp-content/photos/2013/06/penta_cadeado-768x533.jpg 768w, http://18.228.153.232/wp-content/photos/2013/06/penta_cadeado-1024x711.jpg 1024w, http://18.228.153.232/wp-content/photos/2013/06/penta_cadeado.jpg 1086w" sizes="(max-width: 150px) 100vw, 150px" data-pagespeed-url-hash="3447713811"/><noscript><img width="150" height="104" src="http://18.228.153.232/wp-content/photos/2013/06/penta_cadeado-300x208.jpg" class="attachment-150x0 size-150x0 wp-post-image" alt="" srcset="http://18.228.153.232/wp-content/photos/2013/06/penta_cadeado-300x208.jpg 300w, http://18.228.153.232/wp-content/photos/2013/06/penta_cadeado-768x533.jpg 768w, http://18.228.153.232/wp-content/photos/2013/06/penta_cadeado-1024x711.jpg 1024w, http://18.228.153.232/wp-content/photos/2013/06/penta_cadeado.jpg 1086w" sizes="(max-width: 150px) 100vw, 150px" data-pagespeed-url-hash="441316733"/></noscript></a><a href="http://18.228.153.232/archives/3694" class="wp_rp_title">SUPER-SENHA – FECHADURA ELÉTRICA MULTISENHAS (CODE LOCK) COM PIC 16F628A</a></li></ul></li><li class="wp_rp_related_post_column wp_rp_special"><ul><li class="undefined" data-post-type="none" data-position="2" data-poid="in-3784"><a href="http://18.228.153.232/archives/3784" class="wp_rp_thumbnail"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-type="image" data-src="http://18.228.153.232/wp-content/photos/2013/06/SENHA_BINARIA-300x147.png" class="lazy-hidden attachment-150x0 size-150x0 wp-post-image" alt="" srcset="" data-srcset="http://18.228.153.232/wp-content/photos/2013/06/SENHA_BINARIA-300x147.png 300w, http://18.228.153.232/wp-content/photos/2013/06/SENHA_BINARIA-768x376.png 768w, http://18.228.153.232/wp-content/photos/2013/06/SENHA_BINARIA-1024x501.png 1024w, http://18.228.153.232/wp-content/photos/2013/06/SENHA_BINARIA.png 1194w" sizes="(max-width: 150px) 100vw, 150px" data-pagespeed-url-hash="3447713811" onload="pagespeed.CriticalImages.checkImageForCriticality(this);" width="150" height="74"><noscript><img width="150" height="74" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-type="image" data-src="http://18.228.153.232/wp-content/photos/2013/06/SENHA_BINARIA-300x147.png" class="lazy lazy-hidden attachment-150x0 size-150x0 wp-post-image" alt="" srcset="" data-srcset="http://18.228.153.232/wp-content/photos/2013/06/SENHA_BINARIA-300x147.png 300w, http://18.228.153.232/wp-content/photos/2013/06/SENHA_BINARIA-768x376.png 768w, http://18.228.153.232/wp-content/photos/2013/06/SENHA_BINARIA-1024x501.png 1024w, http://18.228.153.232/wp-content/photos/2013/06/SENHA_BINARIA.png 1194w" sizes="(max-width: 150px) 100vw, 150px" data-pagespeed-url-hash="3447713811"/><noscript><img width="150" height="74" src="http://18.228.153.232/wp-content/photos/2013/06/SENHA_BINARIA-300x147.png" class="attachment-150x0 size-150x0 wp-post-image" alt="" srcset="http://18.228.153.232/wp-content/photos/2013/06/SENHA_BINARIA-300x147.png 300w, http://18.228.153.232/wp-content/photos/2013/06/SENHA_BINARIA-768x376.png 768w, http://18.228.153.232/wp-content/photos/2013/06/SENHA_BINARIA-1024x501.png 1024w, http://18.228.153.232/wp-content/photos/2013/06/SENHA_BINARIA.png 1194w" sizes="(max-width: 150px) 100vw, 150px" data-pagespeed-url-hash="473612789"/></noscript></a><a href="http://18.228.153.232/archives/3784" class="wp_rp_title">SENHA BINÁRIA – COM APENAS 2 BOTÕES – COM PIC 12F675/629</a></li></ul></li><li class="wp_rp_related_post_load_more wp_rp_special"><a id="wp_rp_related_load_more" href="#"><span>Load more posts</span><img src="index_dosyalar/loading.gif" class="zloader" ynn05euis=""></a></li></ul></div></div>
+</div> <!-- .entry-content -->
+<footer class="entry-footer">
+</footer><!-- .entry-footer -->
+<div class="mt-author-box">
+<div itemprop="image" class="mt-author__avatar">
+<img alt="" src="index_dosyalar/lazy_placeholder.gif" data-lazy-type="image" data-src="http://1.gravatar.com/avatar/19b90ad501258bf371aa3d76df965d98?s=96&amp;d=mm&amp;r=g" data-srcset="http://1.gravatar.com/avatar/19b90ad501258bf371aa3d76df965d98?s=96&amp;d=mm&amp;r=g 2x" class="lazy-hidden avatar avatar-96 photo" data-pagespeed-url-hash="3447713811" onload="pagespeed.CriticalImages.checkImageForCriticality(this);" width="96" height="96"><noscript><img alt='' src='http://1.gravatar.com/avatar/19b90ad501258bf371aa3d76df965d98?s=96&#038;d=mm&#038;r=g' class='avatar avatar-96 photo' height='96' width='96' data-pagespeed-url-hash="1314702135"/></noscript>		</div><!-- .mt-author-avatar -->
+<div class="mt-author-info">
+<h5 itemprop="name" class="mt-author-name"><a href="http://18.228.153.232/archives/author/clarios" title="Artigos de Claudio Larios" rel="author">Claudio Larios</a></h5>
+<div class="mt-author-meta">
+</div><!-- .mt-author-meta -->
+</div><!-- .mt-author-info -->
+</div><!-- .mt-author-bio --></article><!-- #post-10098 -->
+<nav class="navigation post-navigation" role="navigation" aria-label="Artigos">
+<h2 class="screen-reader-text">Navegação de artigos</h2>
+<div class="nav-links"><div class="nav-previous"><a href="http://18.228.153.232/archives/10080" rel="prev">GERANDO NOTAS MUSICAIS  COM ACIONAMENTO BASEADO EM ULTRASSOM – C/ PIC 16F628A (REF259)</a></div><div class="nav-next"><a href="http://18.228.153.232/archives/10116" rel="next">REPETOC – REPETIDOR DE TOC-TOC (DIDÁTICO) – C/ PIC 12F675 (REF261)</a></div></div>
+</nav>
+<div id="comments" class="comments-area">
+<h2 class="comments-title">
+8 thoughts on “<span>FAÇA UMA SENHA DIGITAL (CODE LOCK) ACIONADA POR TOC-TOCS NA PORTA – C/ PIC 12F675 (REF260)</span>”		</h2><!-- .comments-title -->
+<ol class="comment-list">
+<li id="comment-5125" class="comment even thread-even depth-1 parent">
+<article id="div-comment-5125" class="comment-body">
+<footer class="comment-meta">
+<div class="comment-author vcard">
+<img alt="" src="index_dosyalar/lazy_placeholder.gif" data-lazy-type="image" data-src="http://0.gravatar.com/avatar/67bf327404586210eb83574ed4d1cb47?s=32&amp;d=mm&amp;r=g" srcset="" data-srcset="http://0.gravatar.com/avatar/67bf327404586210eb83574ed4d1cb47?s=64&amp;d=mm&amp;r=g 2x" class="lazy-hidden avatar avatar-32 photo" data-pagespeed-url-hash="3447713811" onload="pagespeed.CriticalImages.checkImageForCriticality(this);" width="32" height="32"><noscript><img alt='' src='http://0.gravatar.com/avatar/67bf327404586210eb83574ed4d1cb47?s=32&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/67bf327404586210eb83574ed4d1cb47?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' data-pagespeed-url-hash="786242656"/></noscript>						<b class="fn">cpexpert2</b> <span class="says">diz:</span>					</div><!-- .comment-author -->
+<div class="comment-metadata">
+<a href="http://18.228.153.232/archives/10098#comment-5125">
+<time datetime="2017-01-12T09:45:01-03:00">
+12 de Janeiro de 2017 às 09:45							</time>
+</a>
+</div><!-- .comment-metadata -->
+</footer><!-- .comment-meta -->
+<div class="comment-content">
+<p>Ola Claudio bom dia.<br>
+Quero parabenizar por  compartilha seu conhecimento e muito mais por 
+criar esse projetos, muito interessante e rudimentar esse projeto em 
+especifico.<br>
+Obrigado.</p>
+</div><!-- .comment-content -->
+</article><!-- .comment-body -->
+<ol class="children">
+<li id="comment-5126" class="comment byuser comment-author-clarios bypostauthor odd alt depth-2">
+<article id="div-comment-5126" class="comment-body">
+<footer class="comment-meta">
+<div class="comment-author vcard">
+<img alt="" src="index_dosyalar/lazy_placeholder.gif" data-lazy-type="image" data-src="http://1.gravatar.com/avatar/19b90ad501258bf371aa3d76df965d98?s=32&amp;d=mm&amp;r=g" srcset="" data-srcset="http://1.gravatar.com/avatar/19b90ad501258bf371aa3d76df965d98?s=64&amp;d=mm&amp;r=g 2x" class="lazy-hidden avatar avatar-32 photo" data-pagespeed-url-hash="3447713811" onload="pagespeed.CriticalImages.checkImageForCriticality(this);" width="32" height="32"><noscript><img alt='' src='http://1.gravatar.com/avatar/19b90ad501258bf371aa3d76df965d98?s=32&#038;d=mm&#038;r=g' srcset='http://1.gravatar.com/avatar/19b90ad501258bf371aa3d76df965d98?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' data-pagespeed-url-hash="2517023669"/></noscript>						<b class="fn">Claudio Larios</b> <span class="says">diz:</span>					</div><!-- .comment-author -->
+<div class="comment-metadata">
+<a href="http://18.228.153.232/archives/10098#comment-5126">
+<time datetime="2017-01-12T11:02:03-03:00">
+12 de Janeiro de 2017 às 11:02							</time>
+</a>
+</div><!-- .comment-metadata -->
+</footer><!-- .comment-meta -->
+<div class="comment-content">
+<p>Olá Cpexpert2!<br>
+Agradeço seu comentário apreciativo pelo trabalho deste blog.<br>
+Boas montagens para você!<br>
+Claudio</p>
+</div><!-- .comment-content -->
+</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+<li id="comment-5045" class="comment byuser comment-author-liliano even thread-odd thread-alt depth-1 parent">
+<article id="div-comment-5045" class="comment-body">
+<footer class="comment-meta">
+<div class="comment-author vcard">
+<img alt="" src="index_dosyalar/lazy_placeholder.gif" data-lazy-type="image" data-src="http://1.gravatar.com/avatar/46b8b36a07c403d380a8703047f1fd34?s=32&amp;d=mm&amp;r=g" srcset="" data-srcset="http://1.gravatar.com/avatar/46b8b36a07c403d380a8703047f1fd34?s=64&amp;d=mm&amp;r=g 2x" class="lazy-hidden avatar avatar-32 photo" data-pagespeed-url-hash="3447713811" onload="pagespeed.CriticalImages.checkImageForCriticality(this);" width="32" height="32"><noscript><img alt='' src='http://1.gravatar.com/avatar/46b8b36a07c403d380a8703047f1fd34?s=32&#038;d=mm&#038;r=g' srcset='http://1.gravatar.com/avatar/46b8b36a07c403d380a8703047f1fd34?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' data-pagespeed-url-hash="2259583310"/></noscript>						<b class="fn">Liliano</b> <span class="says">diz:</span>					</div><!-- .comment-author -->
+<div class="comment-metadata">
+<a href="http://18.228.153.232/archives/10098#comment-5045">
+<time datetime="2016-11-23T18:24:50-03:00">
+23 de Novembro de 2016 às 18:24							</time>
+</a>
+</div><!-- .comment-metadata -->
+</footer><!-- .comment-meta -->
+<div class="comment-content">
+<p>Boa  noite amigo – seria possivel  o uso de um eletreto na entrada ao inves do  PIEZO ?</p>
+</div><!-- .comment-content -->
+</article><!-- .comment-body -->
+<ol class="children">
+<li id="comment-5046" class="comment byuser comment-author-clarios bypostauthor odd alt depth-2">
+<article id="div-comment-5046" class="comment-body">
+<footer class="comment-meta">
+<div class="comment-author vcard">
+<img alt="" src="index_dosyalar/lazy_placeholder.gif" data-lazy-type="image" data-src="http://1.gravatar.com/avatar/19b90ad501258bf371aa3d76df965d98?s=32&amp;d=mm&amp;r=g" srcset="" data-srcset="http://1.gravatar.com/avatar/19b90ad501258bf371aa3d76df965d98?s=64&amp;d=mm&amp;r=g 2x" class="lazy-hidden avatar avatar-32 photo" data-pagespeed-url-hash="3447713811" onload="pagespeed.CriticalImages.checkImageForCriticality(this);" width="32" height="32"><noscript><img alt='' src='http://1.gravatar.com/avatar/19b90ad501258bf371aa3d76df965d98?s=32&#038;d=mm&#038;r=g' srcset='http://1.gravatar.com/avatar/19b90ad501258bf371aa3d76df965d98?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' data-pagespeed-url-hash="2517023669"/></noscript>						<b class="fn">Claudio Larios</b> <span class="says">diz:</span>					</div><!-- .comment-author -->
+<div class="comment-metadata">
+<a href="http://18.228.153.232/archives/10098#comment-5046">
+<time datetime="2016-11-24T11:00:57-03:00">
+24 de Novembro de 2016 às 11:00							</time>
+</a>
+</div><!-- .comment-metadata -->
+</footer><!-- .comment-meta -->
+<div class="comment-content">
+<p>Olá Liliano!<br>
+Nesta montagem, o piezo tanto é usado para captar como para produzir som
+ ao entrar com a senha correta. Esta dualidade não existe no microfone 
+de eletreto, que apenas captaria, sem reproduzir. Outro problema com o 
+microfone de eletreto: ele é extremamente sensível aos sons do ambiente,
+ que promoveria disparos aleatórios, mesmo sem dar os toc-tocs.<br>
+Cláudio</p>
+</div><!-- .comment-content -->
+</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+<li id="comment-5038" class="comment byuser comment-author-foxconn even thread-even depth-1 parent">
+<article id="div-comment-5038" class="comment-body">
+<footer class="comment-meta">
+<div class="comment-author vcard">
+<img alt="" src="index_dosyalar/lazy_placeholder.gif" data-lazy-type="image" data-src="http://0.gravatar.com/avatar/988ee3121892fda887abb012b1b9a6c3?s=32&amp;d=mm&amp;r=g" srcset="" data-srcset="http://0.gravatar.com/avatar/988ee3121892fda887abb012b1b9a6c3?s=64&amp;d=mm&amp;r=g 2x" class="lazy-hidden avatar avatar-32 photo" data-pagespeed-url-hash="3447713811" onload="pagespeed.CriticalImages.checkImageForCriticality(this);" width="32" height="32"><noscript><img alt='' src='http://0.gravatar.com/avatar/988ee3121892fda887abb012b1b9a6c3?s=32&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/988ee3121892fda887abb012b1b9a6c3?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' data-pagespeed-url-hash="3190363601"/></noscript>						<b class="fn">foxconn</b> <span class="says">diz:</span>					</div><!-- .comment-author -->
+<div class="comment-metadata">
+<a href="http://18.228.153.232/archives/10098#comment-5038">
+<time datetime="2016-11-21T20:44:14-03:00">
+21 de Novembro de 2016 às 20:44							</time>
+</a>
+</div><!-- .comment-metadata -->
+</footer><!-- .comment-meta -->
+<div class="comment-content">
+<p>Muito criativa esta ideia Claudio, este daria certo com dtmf, 
+gravando 2 tons, tipo *2 ou similar, ou teria que ter o decoder dtmf 
+mesmo, abraço..</p>
+</div><!-- .comment-content -->
+</article><!-- .comment-body -->
+<ol class="children">
+<li id="comment-5039" class="comment byuser comment-author-clarios bypostauthor odd alt depth-2 parent">
+<article id="div-comment-5039" class="comment-body">
+<footer class="comment-meta">
+<div class="comment-author vcard">
+<img alt="" src="index_dosyalar/lazy_placeholder.gif" data-lazy-type="image" data-src="http://1.gravatar.com/avatar/19b90ad501258bf371aa3d76df965d98?s=32&amp;d=mm&amp;r=g" srcset="" data-srcset="http://1.gravatar.com/avatar/19b90ad501258bf371aa3d76df965d98?s=64&amp;d=mm&amp;r=g 2x" class="lazy-hidden avatar avatar-32 photo" data-pagespeed-url-hash="3447713811" onload="pagespeed.CriticalImages.checkImageForCriticality(this);" width="32" height="32"><noscript><img alt='' src='http://1.gravatar.com/avatar/19b90ad501258bf371aa3d76df965d98?s=32&#038;d=mm&#038;r=g' srcset='http://1.gravatar.com/avatar/19b90ad501258bf371aa3d76df965d98?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' data-pagespeed-url-hash="2517023669"/></noscript>						<b class="fn">Claudio Larios</b> <span class="says">diz:</span>					</div><!-- .comment-author -->
+<div class="comment-metadata">
+<a href="http://18.228.153.232/archives/10098#comment-5039">
+<time datetime="2016-11-22T09:40:42-03:00">
+22 de Novembro de 2016 às 09:40							</time>
+</a>
+</div><!-- .comment-metadata -->
+</footer><!-- .comment-meta -->
+<div class="comment-content">
+<p>Olá Foxconn!<br>
+Obrigado por seu comentário. No entanto,  usar batida na porta para 
+formar uma senha não é ideia minha. Se pesquisar na internet irá 
+encontrar projetos com Arduino e similares. Agora eu não entendi bem o 
+que você quis dizer com usar 2 tons com toc-toc. Poderia explicar 
+melhor?<br>
+Cláudio</p>
+</div><!-- .comment-content -->
+</article><!-- .comment-body -->
+<ol class="children">
+<li id="comment-5040" class="comment byuser comment-author-foxconn even depth-3 parent">
+<article id="div-comment-5040" class="comment-body">
+<footer class="comment-meta">
+<div class="comment-author vcard">
+<img alt="" src="index_dosyalar/lazy_placeholder.gif" data-lazy-type="image" data-src="http://0.gravatar.com/avatar/988ee3121892fda887abb012b1b9a6c3?s=32&amp;d=mm&amp;r=g" srcset="" data-srcset="http://0.gravatar.com/avatar/988ee3121892fda887abb012b1b9a6c3?s=64&amp;d=mm&amp;r=g 2x" class="lazy-hidden avatar avatar-32 photo" data-pagespeed-url-hash="3447713811" onload="pagespeed.CriticalImages.checkImageForCriticality(this);" width="32" height="32"><noscript><img alt='' src='http://0.gravatar.com/avatar/988ee3121892fda887abb012b1b9a6c3?s=32&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/988ee3121892fda887abb012b1b9a6c3?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' data-pagespeed-url-hash="3190363601"/></noscript>						<b class="fn">foxconn</b> <span class="says">diz:</span>					</div><!-- .comment-author -->
+<div class="comment-metadata">
+<a href="http://18.228.153.232/archives/10098#comment-5040">
+<time datetime="2016-11-22T18:32:01-03:00">
+22 de Novembro de 2016 às 18:32							</time>
+</a>
+</div><!-- .comment-metadata -->
+</footer><!-- .comment-meta -->
+<div class="comment-content">
+<p>Olá Claudio, seria uma forma de usar o dtmf de um telefone para 
+acionar o rele, gravando o tom que vc quer que ele reconheça para 
+acionar.</p>
+</div><!-- .comment-content -->
+</article><!-- .comment-body -->
+<ol class="children">
+<li id="comment-5041" class="comment byuser comment-author-clarios bypostauthor odd alt depth-4">
+<article id="div-comment-5041" class="comment-body">
+<footer class="comment-meta">
+<div class="comment-author vcard">
+<img alt="" src="index_dosyalar/lazy_placeholder.gif" data-lazy-type="image" data-src="http://1.gravatar.com/avatar/19b90ad501258bf371aa3d76df965d98?s=32&amp;d=mm&amp;r=g" srcset="" data-srcset="http://1.gravatar.com/avatar/19b90ad501258bf371aa3d76df965d98?s=64&amp;d=mm&amp;r=g 2x" class="lazy-hidden avatar avatar-32 photo" data-pagespeed-url-hash="3447713811" onload="pagespeed.CriticalImages.checkImageForCriticality(this);" width="32" height="32"><noscript><img alt='' src='http://1.gravatar.com/avatar/19b90ad501258bf371aa3d76df965d98?s=32&#038;d=mm&#038;r=g' srcset='http://1.gravatar.com/avatar/19b90ad501258bf371aa3d76df965d98?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' data-pagespeed-url-hash="2517023669"/></noscript>						<b class="fn">Claudio Larios</b> <span class="says">diz:</span>					</div><!-- .comment-author -->
+<div class="comment-metadata">
+<a href="http://18.228.153.232/archives/10098#comment-5041">
+<time datetime="2016-11-22T19:37:38-03:00">
+22 de Novembro de 2016 às 19:37							</time>
+</a>
+</div><!-- .comment-metadata -->
+</footer><!-- .comment-meta -->
+<div class="comment-content">
+<p>Olá Foxconn!<br>
+Obrigado por compartilhar. Mas não seria algo como o artigo ref108 com 
+tema ‘controle seu portão ou fechadura eletronica com celular (somente 
+com som)?<br>
+Cláudio</p>
+</div><!-- .comment-content -->
+</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+</ol><!-- .comment-list -->
+<p class="no-comments">Comments are closed.</p>
+</div><!-- #comments -->		</main><!-- #main -->
+</div><!-- #primary -->
+<aside id="secondary" class="widget-area">
+<section id="search-5" class="widget widget_search"><h4 class="widget-title">Pesquisar</h4><form role="search" method="get" class="search-form" action="http://18.228.153.232/">
+<label>
+<span class="screen-reader-text">Pesquisar por:</span>
+<input type="search" class="search-field" placeholder="Pesquisar …" name="s">
+</label>
+<input type="submit" class="search-submit" value="Pesquisar">
+</form></section><section id="categories-5" class="widget widget_categories"><h4 class="widget-title">Categorias</h4>		<ul>
+<li class="cat-item cat-item-156"><a href="http://18.228.153.232/archives/category/arduino">Arduino</a> (1)
+</li>
+<li class="cat-item cat-item-6"><a href="http://18.228.153.232/archives/category/bi-business-intelligence">BI (Business Intelligence)</a> (4)
+</li>
+<li class="cat-item cat-item-154"><a href="http://18.228.153.232/archives/category/destaques">Destaques</a> (3)
+</li>
+<li class="cat-item cat-item-14"><a href="http://18.228.153.232/archives/category/ecm-ged">ECM / GED</a> (3)
+</li>
+<li class="cat-item cat-item-10"><a href="http://18.228.153.232/archives/category/empregos">Empregos</a> (1)
+</li>
+<li class="cat-item cat-item-11"><a href="http://18.228.153.232/archives/category/engenharia-de-sw">Engenharia de SW</a> (4)
+</li>
+<li class="cat-item cat-item-7"><a href="http://18.228.153.232/archives/category/gerenciamento-ti">Gerenciamento TI</a> (5)
+</li>
+<li class="cat-item cat-item-18"><a href="http://18.228.153.232/archives/category/microcontroladores">Microcontroladores</a> (376)
+<ul class="children">
+<li class="cat-item cat-item-99"><a href="http://18.228.153.232/archives/category/microcontroladores/alarmes-microcontroladores">Alarmes</a> (13)
+</li>
+<li class="cat-item cat-item-89"><a href="http://18.228.153.232/archives/category/microcontroladores/aparelhos-de-medicao">Aparelhos de Medição</a> (64)
+<ul class="children">
+<li class="cat-item cat-item-133"><a href="http://18.228.153.232/archives/category/microcontroladores/aparelhos-de-medicao/capacimetro">Capacímetro</a> (9)
+</li>
+<li class="cat-item cat-item-93"><a href="http://18.228.153.232/archives/category/microcontroladores/aparelhos-de-medicao/frequencimetro">Frequencimetro</a> (4)
+</li>
+<li class="cat-item cat-item-90"><a href="http://18.228.153.232/archives/category/microcontroladores/aparelhos-de-medicao/indutimetrocapacimetro">Indutimetro/Capacimetro</a> (1)
+</li>
+<li class="cat-item cat-item-91"><a href="http://18.228.153.232/archives/category/microcontroladores/aparelhos-de-medicao/ohmeter">Ohmeter</a> (2)
+</li>
+<li class="cat-item cat-item-92"><a href="http://18.228.153.232/archives/category/microcontroladores/aparelhos-de-medicao/voltimetro-aparelhos-de-medicao">Voltimetro</a> (10)
+</li>
+</ul>
+</li>
+<li class="cat-item cat-item-158"><a href="http://18.228.153.232/archives/category/microcontroladores/arduino-microcontroladores">Arduino</a> (2)
+</li>
+<li class="cat-item cat-item-131"><a href="http://18.228.153.232/archives/category/microcontroladores/automotiva">Automotiva</a> (39)
+</li>
+<li class="cat-item cat-item-94"><a href="http://18.228.153.232/archives/category/microcontroladores/cerca-eletrica">Cerca Elétrica</a> (1)
+</li>
+<li class="cat-item cat-item-82"><a href="http://18.228.153.232/archives/category/microcontroladores/controle-remoto">Controle Remoto</a> (67)
+</li>
+<li class="cat-item cat-item-129"><a href="http://18.228.153.232/archives/category/microcontroladores/controle-remoto-infravermelho">Controle Remoto Infravermelho</a> (9)
+</li>
+<li class="cat-item cat-item-127"><a href="http://18.228.153.232/archives/category/microcontroladores/controle-remoto-pwm">Controle Remoto PWM</a> (9)
+</li>
+<li class="cat-item cat-item-96"><a href="http://18.228.153.232/archives/category/microcontroladores/esquemas">Esquemas</a> (1)
+</li>
+<li class="cat-item cat-item-126"><a href="http://18.228.153.232/archives/category/microcontroladores/miscelanea">Miscelânea</a> (159)
+</li>
+<li class="cat-item cat-item-95"><a href="http://18.228.153.232/archives/category/microcontroladores/placa-para-portao-automatico">Placa p/ Portão Automático</a> (5)
+</li>
+<li class="cat-item cat-item-124"><a href="http://18.228.153.232/archives/category/microcontroladores/programadores-hardware">Programadores (Hardware)</a> (9)
+</li>
+<li class="cat-item cat-item-128"><a href="http://18.228.153.232/archives/category/microcontroladores/programa-em-c">Programas PIC (Compiler CCS "C")</a> (190)
+</li>
+<li class="cat-item cat-item-135"><a href="http://18.228.153.232/archives/category/microcontroladores/programas-pic-c-xc8" title="Faça programas usando  XC8 compiler gratuito.">Programas PIC (Compiler XC8 )</a> (33)
+</li>
+<li class="cat-item cat-item-157"><a href="http://18.228.153.232/archives/category/microcontroladores/programas-pic-avr-compiler-great-cow-basic">Programas PIC/Avr (Compiler Great Cow Basic)</a> (11)
+</li>
+<li class="cat-item cat-item-215"><a href="http://18.228.153.232/archives/category/microcontroladores/programas-stm32-compiler-stmcubeide">Programas STM32 (Compiler STMCubeIDE)</a> (3)
+</li>
+<li class="cat-item cat-item-216"><a href="http://18.228.153.232/archives/category/microcontroladores/programas-stm32-mikroc-pro-for-arm">Programas STM32 (MikroC PRO for ARM)</a> (13)
+</li>
+<li class="cat-item cat-item-125"><a href="http://18.228.153.232/archives/category/microcontroladores/projetos-de-leitores">Projetos de Leitores</a> (4)
+</li>
+<li class="cat-item cat-item-130"><a href="http://18.228.153.232/archives/category/microcontroladores/recreativos">Recreativos</a> (47)
+</li>
+<li class="cat-item cat-item-122"><a href="http://18.228.153.232/archives/category/microcontroladores/relogios">Relógios</a> (18)
+</li>
+<li class="cat-item cat-item-132"><a href="http://18.228.153.232/archives/category/microcontroladores/senha-code-lock">Senha Eletronica (Code Lock)</a> (13)
+</li>
+</ul>
+</li>
+<li class="cat-item cat-item-3"><a href="http://18.228.153.232/archives/category/microsoft">MICROSOFT</a> (19)
+<ul class="children">
+<li class="cat-item cat-item-15"><a href="http://18.228.153.232/archives/category/microsoft/c">C#</a> (3)
+</li>
+<li class="cat-item cat-item-2"><a href="http://18.228.153.232/archives/category/microsoft/lista-de-links">Lista de Links</a> (4)
+</li>
+<li class="cat-item cat-item-12"><a href="http://18.228.153.232/archives/category/microsoft/ms-sharepoint">SharePoint</a> (7)
+<ul class="children">
+<li class="cat-item cat-item-17"><a href="http://18.228.153.232/archives/category/microsoft/ms-sharepoint/caml">CAML</a> (1)
+</li>
+</ul>
+</li>
+<li class="cat-item cat-item-16"><a href="http://18.228.153.232/archives/category/microsoft/sql-server">SQL Server</a> (5)
+</li>
+<li class="cat-item cat-item-8"><a href="http://18.228.153.232/archives/category/microsoft/vba">VBA</a> (1)
+</li>
+<li class="cat-item cat-item-9"><a href="http://18.228.153.232/archives/category/microsoft/windows">Windows</a> (2)
+</li>
+</ul>
+</li>
+<li class="cat-item cat-item-19"><a href="http://18.228.153.232/archives/category/multifuncionais">Multifuncionais</a> (1)
+</li>
+<li class="cat-item cat-item-1"><a href="http://18.228.153.232/archives/category/sem-categoria">Sem categoria</a> (1)
+</li>
+<li class="cat-item cat-item-134"><a href="http://18.228.153.232/archives/category/sugestoes-duvidas">Sugestões &amp; Dúvidas</a> (1)
+</li>
+<li class="cat-item cat-item-146"><a href="http://18.228.153.232/archives/category/sumario">Sumário</a> (2)
+</li>
+<li class="cat-item cat-item-4"><a href="http://18.228.153.232/archives/category/web">WEB</a> (5)
+<ul class="children">
+<li class="cat-item cat-item-5"><a href="http://18.228.153.232/archives/category/web/javascript">JavaScript</a> (5)
+</li>
+</ul>
+</li>
+</ul>
+</section></aside><!-- #secondary -->	    </div> <!-- mt-container -->
+</div><!-- #content -->
+<footer itemscope="" id="colophon" class="site-footer">
+<div id="top-footer" class="footer-widgets-wrapper footer-column-four mt-clearfix">
+<div class="mt-container">
+<div class="footer-widgets-area mt-clearfix">
+<div class="mt-footer-widget-wrapper mt-column-wrapper mt-clearfix">
+<div class="mt-footer-widget wow fadeInLeft" data-wow-duration="0.3s" style="visibility: hidden; animation-duration: 0.3s; animation-name: none;">
+<section id="custom_html-2" class="widget_text widget widget_custom_html"><h4 class="widget-title">Licenciamento</h4><div class="textwidget custom-html-widget"><a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img class="lazy-hidden" alt="Licença Creative Commons" style="border-width:0" src="index_dosyalar/lazy_placeholder.gif" data-lazy-type="image" data-src="http://i.creativecommons.org/l/by-sa/4.0/88x31.png" data-pagespeed-url-hash="3447713811" onload="pagespeed.CriticalImages.checkImageForCriticality(this);"><noscript><img alt="Licença Creative Commons" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/4.0/88x31.png" data-pagespeed-url-hash="2734718935"/></noscript></a><br>Este <a xmlns:cc="http://creativecommons.org/ns#" href="http://picsource.com.br/" property="cc:attributionName" rel="cc:attributionURL">trabalho</a> está licenciado com uma Licença <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Atribuição-CompartilhaIgual 4.0 Internacional</a><br><br>
+<h4><a href="http://picsource.com.br/iBlog/archives/6168/">Saiba mais...</a></h4>
+</div></section>				</div>
+<div class="mt-footer-widget wow fadeInLeft" data-woww-duration="0.6s" style="visibility: hidden; animation-name: none;">
+<section id="text-2" class="widget widget_text"><h4 class="widget-title">Doações</h4>			<div class="textwidget"><p>Muito obrigado a todos os que nos tem ajudado com doações.</p>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick"><br>
+<input type="hidden" name="hosted_button_id" value="CR8C2N9ZUBWNA"><br>
+<input type="image" src="index_dosyalar/btn_donateCC_LG.gif" name="submit" alt="PayPal - A maneira mais fácil e segura de efetuar pagamentos online!" border="0"><br>
+<img class="lazy-hidden" alt="" src="index_dosyalar/lazy_placeholder.gif" data-lazy-type="image" data-src="https://www.paypalobjects.com/pt_BR/i/scr/pixel.gif" data-pagespeed-url-hash="3447713811" onload="pagespeed.CriticalImages.checkImageForCriticality(this);" width="1" height="1" border="0"><noscript><img alt="" border="0" src="https://www.paypalobjects.com/pt_BR/i/scr/pixel.gif" width="1" height="1" data-pagespeed-url-hash="2114217872"></noscript><br>
+</form>
+</div>
+</section>					</div>
+<div class="mt-footer-widget wow fadeInLeft" data-wow-duration="0.9s" style="visibility: hidden; animation-duration: 0.9s; animation-name: none;">
+<section id="wpforo_widget_recent_topics-2" class="widget widget_wpforo_widget_recent_topics"><div id="wpf-widget-recent-replies" class="wpforo-widget-wrap"><h4 class="widget-title">Recentes</h4><div class="wpforo-widget-content"><ul>            <li>
+<div class="wpforo-list-item">
+<div class="wpforo-list-item-right" style="width:100%">
+<p class="posttitle">
+<a href="http://picsource.com.br/community/preciso-de-ajuda-com-um-projeto-postado-no-blog/alterando-frequencia-do-pwm">Alterando frequência do PWM</a>
+</p>
+<p class="postuser">By <a href="http://18.228.153.232/community/profile/euri" title="EURI">EURI</a>, <span style="white-space:nowrap;">3 meses ago</span></p>
+</div>
+<div class="wpf-clear"></div>
+</div>
+</li>
+<li>
+<div class="wpforo-list-item">
+<div class="wpforo-list-item-right" style="width:100%">
+<p class="posttitle">
+<a href="http://picsource.com.br/community/preciso-de-ajuda-com-um-micro-controlador-especifico/temporizador-com-pic12f675">Temporizador com pic12f675</a>
+</p>
+<p class="postuser">By <a href="http://18.228.153.232/community/profile/sergioluiz" title="Sergioluiz">Sergioluiz</a>, <span style="white-space:nowrap;">5 meses ago</span></p>
+</div>
+<div class="wpf-clear"></div>
+</div>
+</li>
+<li>
+<div class="wpforo-list-item">
+<div class="wpforo-list-item-right" style="width:100%">
+<p class="posttitle">
+<a href="http://picsource.com.br/community/preciso-de-ajuda-com-um-projeto-postado-no-blog/acionando-rele-com-sensor-ultrasom-sensor-de-proximidade-com-pic-12f675-e-hc-sr-04-ref155">ACIONANDO RELE COM SENSOR ULTRASOM (SENSOR DE PROXIMIDADE) – COM PIC 12F675 E HC-SR-04 (REF155)</a>
+</p>
+<p class="postuser">By <a href="http://18.228.153.232/community/profile/sergiotronic" title="sergiotronic">sergiotronic</a>, <span style="white-space:nowrap;">6 meses ago</span></p>
+</div>
+<div class="wpf-clear"></div>
+</div>
+</li>
+<li>
+<div class="wpforo-list-item">
+<div class="wpforo-list-item-right" style="width:100%">
+<p class="posttitle">
+<a href="http://picsource.com.br/community/preciso-de-ajuda-com-um-projeto-postado-no-blog/dimmer-ac-com-acionamento-atraves-de-um-unico-botao-c-pic-12f675-ref233">DIMMER AC COM ACIONAMENTO ATRAVÉS DE UM ÚNICO BOTÃO – C/ PIC 12F675 (REF233)</a>
+</p>
+<p class="postuser">By <a href="http://18.228.153.232/community/profile/sergiotronic" title="sergiotronic">sergiotronic</a>, <span style="white-space:nowrap;">11 meses ago</span></p>
+</div>
+<div class="wpf-clear"></div>
+</div>
+</li>
+</ul></div></div></section>					</div>
+<div class="mt-footer-widget wow fadeInLeft" data-wow-duration="1.2s" style="visibility: hidden; animation-duration: 1.2s; animation-name: none;">
+<section id="meta-6" class="widget widget_meta"><h4 class="widget-title">Meta</h4>			<ul>
+<li><a href="http://18.228.153.232/wp-login.php?action=register">Registar</a></li>			<li><a href="http://18.228.153.232/wp-login.php">Iniciar sessão</a></li>
+<li><a href="http://18.228.153.232/feed">Feed de entradas</a></li>
+<li><a href="http://18.228.153.232/comments/feed">Feed de comentários</a></li>
+<li><a href="https://pt.wordpress.org/">WordPress.org</a></li>			</ul>
+</section>					</div>
+</div><!-- .mt-footer-widget-wrapper -->
+</div><!-- .footer-widgets-area -->
+</div><!-- .mt-container -->
+</div><!-- .footer-widgets-wrapper -->		<div id="bottom-footer">
+<div class="mt-container">
+<nav id="footer-navigation" class="footer-navigation">
+</nav><!-- #footer-navigation -->
+<div class="site-info">
+<span class="mt-copyright-text">
+Polartis        			</span>
+<span class="sep"> | </span>
+Theme: Color Blog by <a itemprop="url" href="https://mysterythemes.com/">Mystery Themes</a>.        		</div><!-- .site-info -->
+</div><!-- .mt-container -->
+</div><!-- #bottom-footer -->
+</footer><!-- #colophon --><div id="mt-scrollup" class="animated arrow-hide" style="display: block;">Back To Top</div>	
+</div><!-- #page -->
+<!-- <link rel='stylesheet' id='mediaelement-css'  href='http://18.228.153.232/wp-includes/js/mediaelement/mediaelementplayer-legacy.min.css?ver=4.2.13-9993131' type='text/css' media='all' /> -->
+<!-- <link rel='stylesheet' id='wp-mediaelement-css'  href='http://18.228.153.232/wp-includes/js/mediaelement/wp-mediaelement.min.css?ver=5.4.2' type='text/css' media='all' /> -->
+<link rel="stylesheet" type="text/css" href="index_dosyalar/6i2wd.css" media="all">
+<script src="index_dosyalar/wp-includes,_js,_imagesloaded.min.js,qver==3.2.0+wp-includes,.js"></script><script>eval(mod_pagespeed_Che1xByOQs);</script>
+<script>eval(mod_pagespeed_eAIb0XIy_M);</script>
+<script>eval(mod_pagespeed_VAmqCW6nv2);</script>
+<script src="index_dosyalar/mt-combine-scripts.js,qver==1.0.7+navigation.js,qver==1.0.7+s.js"></script><script>eval(mod_pagespeed_u2q8WwAUCP);</script>
+<script>eval(mod_pagespeed_hkxZ6Y98N7);</script>
+<script>eval(mod_pagespeed_sYaNWcJC_f);</script>
+<script type="text/javascript">//<![CDATA[
+var color_blogObject={"menu_sticky":"on","wow_effect":"on"};
+//]]></script>
+<script type="text/javascript" src="index_dosyalar/mt-custom-scripts.js"></script>
+<script type="text/javascript">//<![CDATA[
+var a3_lazyload_params={"apply_images":"1","apply_videos":"1"};
+//]]></script>
+<script src="index_dosyalar/jquery.lazyloadxt.extra.min.js,qver==2.3.2+jquery.lazyloadxt..js"></script><script>eval(mod_pagespeed_GSDDPp_ct1);</script>
+<script>eval(mod_pagespeed_Nq5BYjtXGx);</script>
+<script type="text/javascript">//<![CDATA[
+var a3_lazyload_extend_params={"edgeY":"0","horizontal_container_classnames":""};
+//]]></script>
+<script src="index_dosyalar/wp-content,_plugins,_a3-lazy-load,_assets,_js,_jquery.lazyloa.js"></script><script>eval(mod_pagespeed_L9xC_WjU6p);</script>
+<script>eval(mod_pagespeed_$pSkPGv1IM);</script>
+<script>eval(mod_pagespeed_VA79sSUo87);</script>
+<script type="text/javascript">var mejsL10n={"language":"pt","strings":{"mejs.download-file":"Descarregar ficheiro","mejs.install-flash":"Est\u00e1 a usar um navegador sem Flash Player activado ou instalado. Por favor, active o plugin Flash Player ou descarregue a vers\u00e3o mais recente em https:\/\/get.adobe.com\/flashplayer\/.","mejs.fullscreen":"Ecr\u00e3 inteiro","mejs.play":"Reproduzir","mejs.pause":"Pausa","mejs.time-slider":"Indicador de tempo","mejs.time-help-text":"Use as setas esquerda\/direita para recuar\/avan\u00e7ar um segundo, ou use as setas baixo\/cima para recuar\/avan\u00e7ar dez segundos.","mejs.live-broadcast":"Emiss\u00e3o em directo","mejs.volume-help-text":"Use as setas cima\/baixo para aumentar ou diminuir o volume.","mejs.unmute":"Ligar som","mejs.mute":"Mudo","mejs.volume-slider":"Indicador de volume","mejs.video-player":"Reprodutor de v\u00eddeo","mejs.audio-player":"Reprodutor de \u00e1udio","mejs.captions-subtitles":"Legendas","mejs.captions-chapters":"Cap\u00edtulos","mejs.none":"Nenhum","mejs.afrikaans":"Africanse","mejs.albanian":"Alban\u00eas","mejs.arabic":"\u00c1rabe","mejs.belarusian":"Bielorrusso","mejs.bulgarian":"B\u00falgaro","mejs.catalan":"Catal\u00e3o","mejs.chinese":"Chin\u00eas","mejs.chinese-simplified":"Chin\u00eas (Simplificado)","mejs.chinese-traditional":"Chin\u00eas (Tradicional)","mejs.croatian":"Croata","mejs.czech":"Checo","mejs.danish":"Dinamarqu\u00eas","mejs.dutch":"Holand\u00eas","mejs.english":"Ingl\u00eas","mejs.estonian":"Estoniano","mejs.filipino":"Filipino","mejs.finnish":"Finland\u00eas","mejs.french":"Franc\u00eas","mejs.galician":"Galego","mejs.german":"Alem\u00e3o","mejs.greek":"Grego","mejs.haitian-creole":"Crioulo haitiano","mejs.hebrew":"Hebraico","mejs.hindi":"H\u00edndi","mejs.hungarian":"H\u00fangaro","mejs.icelandic":"Island\u00eas","mejs.indonesian":"Indon\u00e9sio","mejs.irish":"Irland\u00eas","mejs.italian":"Italiano","mejs.japanese":"Japon\u00eas","mejs.korean":"Coreano","mejs.latvian":"Let\u00e3o","mejs.lithuanian":"Lituano","mejs.macedonian":"Maced\u00f3nio","mejs.malay":"Malaio","mejs.maltese":"Malt\u00eas","mejs.norwegian":"Noruegu\u00eas","mejs.persian":"Persa","mejs.polish":"Polaco","mejs.portuguese":"Portugu\u00eas","mejs.romanian":"Romeno","mejs.russian":"Russo","mejs.serbian":"S\u00e9rvio","mejs.slovak":"Eslovaco","mejs.slovenian":"Esloveno","mejs.spanish":"Espanhol","mejs.swahili":"Sua\u00edli","mejs.swedish":"Su\u00e9co","mejs.tagalog":"Tagalo","mejs.thai":"Tailand\u00eas","mejs.turkish":"Turco","mejs.ukrainian":"Ucraniano","mejs.vietnamese":"Vietnamita","mejs.welsh":"Gal\u00eas","mejs.yiddish":"\u00cddiche"}};</script>
+<script type="text/javascript" src="index_dosyalar/mediaelement-and-player.min.js,qver=4.2.13-9993131.pagespeed..js"></script>
+<script type="text/javascript">//<![CDATA[
+!function(e,a){void 0===mejs.plugins&&(mejs.plugins={},mejs.plugins.silverlight=[],mejs.plugins.silverlight.push({types:[]})),mejs.HtmlMediaElementShim=mejs.HtmlMediaElementShim||{getTypeFromFile:mejs.Utils.getTypeFromFile},void 0===mejs.MediaFeatures&&(mejs.MediaFeatures=mejs.Features),void 0===mejs.Utility&&(mejs.Utility=mejs.Utils);var t=MediaElementPlayer.prototype.init;MediaElementPlayer.prototype.init=function(){this.options.classPrefix="mejs-",this.$media=this.$node=a(this.node),t.call(this)};var i=MediaElementPlayer.prototype._meReady;MediaElementPlayer.prototype._meReady=function(){this.container=a(this.container),this.controls=a(this.controls),this.layers=a(this.layers),i.apply(this,arguments)},MediaElementPlayer.prototype.getElement=function(e){return void 0!==a&&e instanceof a?e[0]:e},MediaElementPlayer.prototype.buildfeatures=function(e,t,i,s){for(var r=["playpause","current","progress","duration","tracks","volume","fullscreen"],l=0,n=this.options.features.length;l<n;l++){var o=this.options.features[l];if(this["build"+o])try{-1===r.indexOf(o)?this["build"+o](e,a(t),a(i),s):this["build"+o](e,t,i,s)}catch(e){console.error("error building "+o,e)}}}}(window,jQuery);
+//]]></script>
+<script type="text/javascript">//<![CDATA[
+var _wpmejsSettings={"pluginPath":"\/wp-includes\/js\/mediaelement\/","classPrefix":"mejs-","stretching":"responsive"};
+//]]></script>
+<script src="index_dosyalar/wp-mediaelement.min.js,qver==5.4.2+renderers,_vimeo.min.js,qv.js"></script><script>eval(mod_pagespeed_gyZVE7KbjK);</script>
+<script>eval(mod_pagespeed_KgNz1FqanG);</script>
+
+</body></html>
+<!-- WP Fastest Cache file was created in 0.7625949382782 seconds, on 05-09-22 12:01:13 -->
+<!-- via php -->
