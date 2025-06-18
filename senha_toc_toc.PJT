@@ -1,0 +1,36 @@
+[PROJECT]
+Target=senha_toc_toc.HEX
+Development_Mode=2
+Processor=0x2675
+ToolSuite=CCS
+
+[Directories]
+Include=
+Library=
+LinkerScript=
+
+[Target Data]
+FileList=senha_toc_toc.c;
+BuildTool=C-COMPILER
+OptionString=+FM
+AdditionalOptionString=
+BuildRequired=1
+
+[senha_toc_toc.c]
+Type=4
+Path=
+FileList=
+BuildTool=
+OptionString=
+AdditionalOptionString=
+
+[mru-list]
+1=C:\CLAUDI~1\INTERN~1\Z_TOC_~1\SENHA_~1.C
+
+[Windows]
+0=0000 C:\CLAUDI~1\INTERN~1\Z_TOC_~1\SENHA_~1.C 0 0 796 451 3 0
+
+[Opened Files]
+1=C:\claudio_backup\internet projetos\z_toc_toc_senha\senha_toc_toc.c
+2=
+3=

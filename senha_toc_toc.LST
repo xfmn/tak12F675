@@ -1,0 +1,900 @@
+CCS PCM C Compiler, Version 3.200
+
+*
+0000:  MOVLW  00
+0001:  MOVWF  0A
+0002:  GOTO   03C
+0003:  NOP
+0004:  BTFSC  03.5
+0005:  GOTO   00A
+0006:  MOVWF  25
+0007:  SWAPF  03,W
+0008:  MOVWF  26
+0009:  GOTO   00F
+000A:  BCF    03.5
+000B:  MOVWF  25
+000C:  SWAPF  03,W
+000D:  MOVWF  26
+000E:  BSF    26.1
+000F:  MOVF   0A,W
+0010:  MOVWF  2D
+0011:  CLRF   0A
+0012:  BCF    03.7
+0013:  SWAPF  25,F
+0014:  MOVF   04,W
+0015:  MOVWF  27
+0016:  MOVF   20,W
+0017:  MOVWF  28
+0018:  MOVF   21,W
+0019:  MOVWF  29
+001A:  MOVF   22,W
+001B:  MOVWF  2A
+001C:  MOVF   23,W
+001D:  MOVWF  2B
+001E:  MOVF   24,W
+001F:  MOVWF  2C
+0020:  BCF    03.5
+0021:  MOVLW  8C
+0022:  MOVWF  04
+0023:  BTFSS  00.0
+0024:  GOTO   027
+0025:  BTFSC  0C.0
+0026:  GOTO   042
+0027:  MOVF   27,W
+0028:  MOVWF  04
+0029:  MOVF   28,W
+002A:  MOVWF  20
+002B:  MOVF   29,W
+002C:  MOVWF  21
+002D:  MOVF   2A,W
+002E:  MOVWF  22
+002F:  MOVF   2B,W
+0030:  MOVWF  23
+0031:  MOVF   2C,W
+0032:  MOVWF  24
+0033:  MOVF   2D,W
+0034:  MOVWF  0A
+0035:  SWAPF  26,W
+0036:  MOVWF  03
+0037:  BCF    03.5
+0038:  SWAPF  25,W
+0039:  BTFSC  26.1
+003A:  BSF    03.5
+003B:  RETFIE
+003C:  CALL   3FF
+003D:  BSF    03.5
+003E:  MOVWF  10
+003F:  MOVLW  00
+0040:  MOVWF  0A
+0041:  GOTO   0EC
+....................  /*******************************************************************************  
+....................   
+....................   SENHA TOC-TOC  
+....................   
+....................   Senha de acesso feita através de batidas na porta (toc-toc).  
+....................   
+....................   Usa piezo como sensor e falante  
+....................   
+....................   Utiliza um relé na saída para ligar uma fechadura elétrica  
+....................   
+....................   Autor: Claudio Lários  
+....................   
+....................   Data: 17/11/2016  
+....................   
+....................   Uso: Primeiro deverá ser gravado uma senha de toc-tocs.  
+....................   Aperte o botão sw_prog momentâneamente. O led prog se acenderá indicando  
+....................   modo de programação de senha.  
+....................   Bata na porta (ou local que está colado o sensor piezo) com tocs que não ul-  
+....................   trapassem o total de 20 e que com tempo entre tocs menores que 3,6 segundos.  
+....................   Após inserir a senha de tocs espere o led apagar.  
+....................   Para testar, bata na porta com o mesmo número de tocs e na mesma sequência,  
+....................   imitando o mais fiel possível a senha gravada. Se correta irá acionar a saída  
+....................   do relé.  
+....................   O modo de operação da saída poderá ser escolhido entre Pulso ou Retenção, co-  
+....................   mentando o #define SAIDA_PULSO abaixo.  
+....................   O disco piezoelétrico (diametro de 20 mm) usado como sensor de toque deve ser  
+....................   colado no local que receberá os toc-tocs. Poderá usar cola quente (silicone).  
+....................   
+....................   
+....................   Uso didático.  
+....................   
+....................   Este arquivo é parte integrante do blog Larios.Tecnologia.ws  
+....................   
+.................... ********************************************************************************  
+.................... Escolha do usuário:  
+.................... Descomente o abaixo para modo pulso na saída do rele (recompile o arquivo para  
+....................  obter o novo arquivo hex).                                                 */  
+....................   
+....................        #define SAIDA_PULSO  
+....................   
+....................   
+.................... /*****************************************************************************/  
+.................... #include <12F675.h> 
+....................  //////// Standard Header file for the PIC12F675 device ////////////////  
+.................... #device PIC12F675  
+.................... #list  
+....................  
+.................... #device adc=8  
+.................... #use delay(clock=4000000)  
+*
+004B:  MOVLW  4F
+004C:  MOVWF  04
+004D:  MOVF   00,W
+004E:  BTFSC  03.2
+004F:  GOTO   05F
+0050:  MOVLW  01
+0051:  MOVWF  21
+0052:  CLRF   20
+0053:  DECFSZ 20,F
+0054:  GOTO   053
+0055:  DECFSZ 21,F
+0056:  GOTO   052
+0057:  MOVLW  4A
+0058:  MOVWF  20
+0059:  DECFSZ 20,F
+005A:  GOTO   059
+005B:  NOP
+005C:  NOP
+005D:  DECFSZ 00,F
+005E:  GOTO   050
+005F:  RETLW  00
+*
+007F:  MOVLW  0D
+0080:  SUBWF  4F,F
+0081:  BTFSC  03.0
+0082:  GOTO   090
+0083:  MOVLW  4F
+0084:  MOVWF  04
+0085:  MOVLW  FC
+0086:  ANDWF  00,F
+0087:  RRF    00,F
+0088:  RRF    00,F
+0089:  MOVF   00,W
+008A:  BTFSC  03.2
+008B:  GOTO   090
+008C:  GOTO   08E
+008D:  NOP
+008E:  DECFSZ 00,F
+008F:  GOTO   08D
+0090:  RETLW  00
+.................... #fuses NOWDT,INTRC_IO, NOCPD, NOPROTECT, NOMCLR, NOPUT, NOBROWNOUT  
+....................   
+....................   
+.................... #byte gpio   = 0x5  
+.................... #byte trisio = 0x85  
+.................... #byte tmr1h  = 0x0f  
+.................... #byte tmr1l  = 0x0e  
+.................... #byte option_reg  = 0x81  
+.................... #byte wpu  = 0x95  
+.................... #bit  wpu_0 = 0x95.0  
+.................... #bit  tmr1_on = 0x10.0  
+....................   
+.................... #bit  piezo   = 0x5.2 //pino 5  
+.................... #bit  tris_p  = 0x85.2  
+.................... #bit  sw_gr   = 0x5.0 //pino 7  
+.................... #bit  led_gr  = 0x5.4 //pino 3  
+.................... #bit  rele    = 0x5.5 //pino 2  
+.................... #bit  led_op   = 0x5.1 //pino 6  
+.................... unsigned int8 valor[]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};//buffer de tocs  
+*
+00FA:  CLRF   2E
+00FB:  CLRF   2F
+00FC:  CLRF   30
+00FD:  CLRF   31
+00FE:  CLRF   32
+00FF:  CLRF   33
+0100:  CLRF   34
+0101:  CLRF   35
+0102:  CLRF   36
+0103:  CLRF   37
+0104:  CLRF   38
+0105:  CLRF   39
+0106:  CLRF   3A
+0107:  CLRF   3B
+0108:  CLRF   3C
+0109:  CLRF   3D
+010A:  CLRF   3E
+010B:  CLRF   3F
+010C:  CLRF   40
+010D:  CLRF   41
+010E:  CLRF   42
+.................... unsigned int8 tmr1u=0;//quantidade de vezes que houve interrupção do timer 1  
+010F:  CLRF   43
+.................... unsigned int8 qtoc=0;//indica qual toc está sendo apurado  
+0110:  CLRF   44
+.................... unsigned int1 f_tmax=0;//indica que já houve entrada de senha pelo usuário  
+0111:  BCF    45.0
+....................   
+.................... #define N_TOC_MAX 20  // número de toques máximo  
+.................... #define TOLERANCIA 10 // diferença de tempo suportável entre toc gravado e do acesso  
+.................... #define TEMPO_RELE_LIGADO 5000//Tempo que o rele fica ligado -5 seg (modo pulso)  
+....................   
+....................   
+....................   
+.................... //   #define  teste  //usado no desenvolvimento apenas     
+....................   
+....................   
+.................... /*******************************************************************************  
+....................              ROTINAS  
+.................... *******************************************************************************/  
+.................... void som(){//gera som para indicar sucesso na combinação de toques  
+....................    unsigned int8 a;  
+....................    setup_adc_ports(NO_ANALOGS);//desliga port do adc  
+*
+0091:  MOVF   1F,W
+0092:  ANDLW  BF
+0093:  MOVWF  1F
+0094:  BSF    03.5
+0095:  MOVF   1F,W
+0096:  ANDLW  F0
+0097:  MOVWF  1F
+....................    tris_p=0;//torna pino como saída  
+0098:  BCF    05.2
+....................   
+....................     for(a=0;a<100;a++){  
+0099:  BCF    03.5
+009A:  CLRF   4E
+009B:  MOVF   4E,W
+009C:  SUBLW  63
+009D:  BTFSS  03.0
+009E:  GOTO   0AB
+....................          piezo=1;  
+009F:  BSF    05.2
+....................          delay_us(637);//784 hz sol  
+00A0:  MOVLW  D4
+00A1:  MOVWF  20
+00A2:  DECFSZ 20,F
+00A3:  GOTO   0A2
+....................          piezo=0;  
+00A4:  BCF    05.2
+....................          delay_us(634);  
+00A5:  MOVLW  D3
+00A6:  MOVWF  20
+00A7:  DECFSZ 20,F
+00A8:  GOTO   0A7
+....................     }  
+00A9:  INCF   4E,F
+00AA:  GOTO   09B
+....................        delay_ms(100);  
+00AB:  MOVLW  64
+00AC:  MOVWF  4F
+00AD:  CALL   04B
+....................       for(a=0;a<100;a++){  
+00AE:  CLRF   4E
+00AF:  MOVF   4E,W
+00B0:  SUBLW  63
+00B1:  BTFSS  03.0
+00B2:  GOTO   0C1
+....................          piezo=1;  
+00B3:  BSF    05.2
+....................          delay_us(758);//659 hz  mi  
+00B4:  MOVLW  FC
+00B5:  MOVWF  20
+00B6:  DECFSZ 20,F
+00B7:  GOTO   0B6
+00B8:  NOP
+....................          piezo=0;  
+00B9:  BCF    05.2
+....................          delay_us(755);  
+00BA:  MOVLW  FB
+00BB:  MOVWF  20
+00BC:  DECFSZ 20,F
+00BD:  GOTO   0BC
+00BE:  NOP
+....................       }  
+00BF:  INCF   4E,F
+00C0:  GOTO   0AF
+....................       delay_ms(100);  
+00C1:  MOVLW  64
+00C2:  MOVWF  4F
+00C3:  CALL   04B
+....................        for(a=0;a<100;a++){  
+00C4:  CLRF   4E
+00C5:  MOVF   4E,W
+00C6:  SUBLW  63
+00C7:  BTFSS  03.0
+00C8:  GOTO   0D9
+....................          piezo=1;  
+00C9:  BSF    05.2
+....................          delay_us(1136);//440 hz la  
+00CA:  MOVLW  01
+00CB:  MOVWF  4F
+00CC:  CALL   04B
+00CD:  MOVLW  88
+00CE:  MOVWF  4F
+00CF:  CALL   07F
+....................          piezo=0;  
+00D0:  BCF    05.2
+....................          delay_us(1134);  
+00D1:  MOVLW  01
+00D2:  MOVWF  4F
+00D3:  CALL   04B
+00D4:  MOVLW  86
+00D5:  MOVWF  4F
+00D6:  CALL   07F
+....................       }  
+00D7:  INCF   4E,F
+00D8:  GOTO   0C5
+....................        delay_ms(100);  
+00D9:  MOVLW  64
+00DA:  MOVWF  4F
+00DB:  CALL   04B
+....................   
+....................    //===============================================  
+....................    tris_p=1;//pino volta a ser entrada  
+00DC:  BSF    03.5
+00DD:  BSF    05.2
+....................    setup_adc_ports(sAN2|VSS_VDD);//volta a usar o adc do pino 5  
+00DE:  BCF    03.5
+00DF:  MOVF   1F,W
+00E0:  ANDLW  BF
+00E1:  MOVWF  1F
+00E2:  BSF    03.5
+00E3:  MOVF   1F,W
+00E4:  ANDLW  F0
+00E5:  IORLW  04
+00E6:  MOVWF  1F
+....................    delay_ms(100);//delay  
+00E7:  MOVLW  64
+00E8:  BCF    03.5
+00E9:  MOVWF  4F
+00EA:  CALL   04B
+.................... }  
+00EB:  GOTO   246 (RETURN)
+....................   
+.................... /*******************************************************************************  
+....................                       LE ADC - TESTA SW PROG  
+.................... *******************************************************************************/  
+.................... void le_adc_sw(){  
+....................   
+....................  while(read_adc()<4){  
+*
+0060:  BSF    1F.1
+0061:  BTFSC  1F.1
+0062:  GOTO   061
+0063:  MOVF   1E,W
+0064:  SUBLW  03
+0065:  BTFSS  03.0
+0066:  GOTO   073
+....................      if(!sw_gr)led_gr=1;//testa interruptor de gravação  
+0067:  BTFSS  05.0
+0068:  BSF    05.4
+....................      if(f_tmax){led_op=0;break;}//se tempo máximo entre toc-toc foi alcançado sai desta rotina  
+0069:  BTFSS  45.0
+006A:  GOTO   06D
+006B:  BCF    05.1
+006C:  GOTO   073
+....................      delay_us(50);  
+006D:  MOVLW  10
+006E:  MOVWF  20
+006F:  DECFSZ 20,F
+0070:  GOTO   06F
+0071:  NOP
+....................    }//aguarda toc-toc  
+0072:  GOTO   060
+....................    delay_ms(30);//espera finalizar o toc-toc atual  
+0073:  MOVLW  1E
+0074:  MOVWF  4F
+0075:  CALL   04B
+....................    if(!qtoc && !f_tmax){//se houve um toc  
+0076:  MOVF   44,F
+0077:  BTFSS  03.2
+0078:  GOTO   07E
+0079:  BTFSC  45.0
+007A:  GOTO   07E
+....................       tmr1l=0;//reseta para uma nova contagem entre tocs  
+007B:  CLRF   0E
+....................       tmr1u=0;  
+007C:  CLRF   43
+....................       tmr1h=0;  
+007D:  CLRF   0F
+....................      // qtoc=1;//próximo passo  
+....................   
+....................    }  
+.................... }  
+007E:  GOTO   15C (RETURN)
+....................   
+.................... /*******************************************************************************  
+....................                  ROTINA DE INTERRUPÇÃO DO TIMER 1  
+.................... *******************************************************************************/  
+....................   
+.................... #int_timer1  
+.................... void isr_timer1(){  
+....................    tmr1u++; //incrementa este contador a cada 524288 useg  
+*
+0042:  INCF   43,F
+....................    if(tmr1u>=7){  
+0043:  MOVF   43,W
+0044:  SUBLW  06
+0045:  BTFSC  03.0
+0046:  GOTO   048
+....................       f_tmax=1;//indica tempo máximo no intervalo (3,6seg)  
+0047:  BSF    45.0
+....................    }  
+.................... }  
+....................   
+.................... /*******************************************************************************  
+....................              ROTINA   MAIN  
+.................... *******************************************************************************/  
+....................   
+0048:  BCF    0C.0
+0049:  BCF    0A.3
+004A:  GOTO   027
+.................... void main() {  
+....................   
+*
+00EC:  CLRF   04
+00ED:  MOVLW  1F
+00EE:  ANDWF  03,F
+00EF:  MOVF   1F,W
+00F0:  ANDLW  BF
+00F1:  MOVWF  1F
+00F2:  BSF    03.5
+00F3:  MOVF   1F,W
+00F4:  ANDLW  F0
+00F5:  IORLW  0F
+00F6:  MOVWF  1F
+00F7:  MOVLW  07
+00F8:  BCF    03.5
+00F9:  MOVWF  1F
+....................   
+....................    setup_adc_ports(sAN2|VSS_VDD);//ajusta port para analógico no pino 5  
+*
+0112:  MOVF   1F,W
+0113:  ANDLW  BF
+0114:  MOVWF  1F
+0115:  BSF    03.5
+0116:  MOVF   1F,W
+0117:  ANDLW  F0
+0118:  IORLW  04
+0119:  MOVWF  1F
+....................    setup_adc(ADC_CLOCK_INTERNAL);//clock do adc  
+011A:  MOVF   1F,W
+011B:  ANDLW  8F
+011C:  IORLW  30
+011D:  MOVWF  1F
+011E:  BCF    03.5
+011F:  BCF    1F.7
+0120:  BSF    1F.0
+....................    setup_counters(RTCC_INTERNAL,RTCC_DIV_1);//não usado  
+0121:  MOVLW  08
+0122:  MOVWF  20
+0123:  BTFSS  20.3
+0124:  GOTO   12D
+0125:  MOVLW  07
+0126:  CLRF   01
+0127:  MOVLW  81
+0128:  MOVWF  04
+0129:  MOVF   00,W
+012A:  ANDLW  C0
+012B:  IORLW  0F
+012C:  MOVWF  00
+012D:  CLRWDT
+012E:  MOVLW  81
+012F:  MOVWF  04
+0130:  MOVF   00,W
+0131:  ANDLW  C0
+0132:  IORWF  20,W
+0133:  MOVWF  00
+....................    setup_timer_1(T1_INTERNAL|T1_DIV_BY_8);//timer 1 div/8 interno  
+0134:  MOVLW  B5
+0135:  MOVWF  10
+....................    setup_comparator(NC_NC_NC_NC);//desliga comparadores  
+0136:  MOVLW  07
+0137:  MOVWF  19
+0138:  BSF    03.5
+0139:  MOVF   05,W
+013A:  MOVLW  03
+013B:  BCF    03.5
+013C:  MOVWF  20
+013D:  DECFSZ 20,F
+013E:  GOTO   13D
+013F:  MOVF   19,W
+0140:  BCF    0C.3
+....................    setup_vref(FALSE);//desliga vref  
+0141:  BSF    03.5
+0142:  CLRF   19
+....................    set_adc_channel(2);//ajusta canal para o conversor ad para o pino 5  
+0143:  MOVLW  08
+0144:  BCF    03.5
+0145:  MOVWF  21
+0146:  MOVF   1F,W
+0147:  ANDLW  C3
+0148:  IORWF  21,W
+0149:  MOVWF  1F
+....................    gpio=0; //desliga todas as saídas  
+014A:  CLRF   05
+....................    trisio=0b001101;//saidas e entradas  
+014B:  MOVLW  0D
+014C:  BSF    03.5
+014D:  MOVWF  05
+....................    option_reg=0;//ativa pull up geral  
+014E:  CLRF   01
+....................    wpu_0=1;//liga pullup do pino 7  
+014F:  BSF    15.0
+....................    set_timer1(0);  
+0150:  BCF    03.5
+0151:  CLRF   0F
+0152:  CLRF   0E
+....................    enable_interrupts(INT_TIMER1);//liga interrupção do timer 1  
+0153:  BSF    03.5
+0154:  BSF    0C.0
+....................    enable_interrupts(GLOBAL);//liga geral das interrupções  
+0155:  MOVLW  C0
+0156:  BCF    03.5
+0157:  IORWF  0B,F
+....................    tmr1_on=1;//liga timer 1  
+0158:  BSF    10.0
+....................    f_tmax=0;//reseta flag de tempo máximo  
+0159:  BCF    45.0
+....................    qtoc=0;//zera contador  
+015A:  CLRF   44
+....................   
+.................... /*******************************************************************************  
+....................             LAÇO DE REPETIÇÃO  
+.................... *******************************************************************************/  
+....................   
+....................    for(;;){  
+....................    unsigned int8 tempo,a,z,b;  
+....................    signed int16 x,y;  
+....................    le_adc_sw();//testa por algum toc-toc ou estouro de tempo (testa sw de programação)  
+015B:  GOTO   060
+....................   
+....................   
+....................    if(!f_tmax){//foi um  toc-toc  
+015C:  BTFSC  45.0
+015D:  GOTO   182
+....................       led_op=1;//led de operação ligado  
+015E:  BSF    05.1
+....................       if(qtoc>1) {  
+015F:  MOVF   44,W
+0160:  SUBLW  01
+0161:  BTFSC  03.0
+0162:  GOTO   179
+....................       tempo=tmr1h;  
+0163:  MOVF   0F,W
+0164:  MOVWF  46
+....................       tempo=tempo>>3;//desloca 3 casas a direita  
+0165:  RRF    46,F
+0166:  RRF    46,F
+0167:  RRF    46,F
+0168:  MOVLW  1F
+0169:  ANDWF  46,F
+....................       tmr1u=tmr1u<<5;//desloca 5 casas para esquerda  
+016A:  SWAPF  43,F
+016B:  RLF    43,F
+016C:  MOVLW  E0
+016D:  ANDWF  43,F
+....................       tmr1u=tmr1u&0b11100000;//mantém apenas os 3 digitos superiores  
+016E:  ANDWF  43,F
+....................       tempo=tempo|tmr1u;//concatena  
+016F:  MOVF   43,W
+0170:  IORWF  46,F
+....................      // if(qtoc>2) {  
+....................        // b=qtoc-3;//elimina contagem morta  
+....................         b=qtoc-2;//elimina contagem morta  
+0171:  MOVLW  02
+0172:  SUBWF  44,W
+0173:  MOVWF  49
+....................         valor[b]=tempo; //salva no array  
+0174:  MOVLW  2E
+0175:  ADDWF  49,W
+0176:  MOVWF  04
+0177:  MOVF   46,W
+0178:  MOVWF  00
+....................       }  
+....................   
+....................   
+....................       qtoc++;  
+0179:  INCF   44,F
+....................       if(qtoc>N_TOC_MAX)qtoc=0;//limita número de toc-tocs  
+017A:  MOVF   44,W
+017B:  SUBLW  14
+017C:  BTFSS  03.0
+017D:  CLRF   44
+....................       tmr1l=0;  
+017E:  CLRF   0E
+....................       tmr1u=0;  
+017F:  CLRF   43
+....................       tmr1h=0;  
+0180:  CLRF   0F
+....................   
+....................   
+....................    }  
+....................    else{//foi pelo tempo maximo alcançado  
+0181:  GOTO   25E
+....................   
+....................      if(qtoc>2){//somente se tiver tido algum toc-toc salvo  
+0182:  MOVF   44,W
+0183:  SUBLW  02
+0184:  BTFSC  03.0
+0185:  GOTO   259
+....................        qtoc-=3;////elimina contagem morta  
+0186:  MOVLW  03
+0187:  SUBWF  44,F
+....................        if(led_gr){//salvar na eeprom  
+0188:  BTFSS  05.4
+0189:  GOTO   1E6
+....................         #ifndef teste  
+....................         for(a=0;a<23;a++) write_eeprom(a,0xff);//apaga senha anterior  
+018A:  CLRF   47
+018B:  MOVF   47,W
+018C:  SUBLW  16
+018D:  BTFSS  03.0
+018E:  GOTO   1A7
+018F:  MOVF   47,W
+0190:  BSF    03.5
+0191:  MOVWF  1B
+0192:  MOVLW  FF
+0193:  MOVWF  1A
+0194:  BSF    1C.2
+0195:  BCF    03.5
+0196:  MOVF   0B,W
+0197:  MOVWF  20
+0198:  BCF    0B.7
+0199:  BSF    03.5
+019A:  MOVLW  55
+019B:  MOVWF  1D
+019C:  MOVLW  AA
+019D:  MOVWF  1D
+019E:  BSF    1C.1
+019F:  BTFSC  1C.1
+01A0:  GOTO   19F
+01A1:  BCF    1C.2
+01A2:  BCF    03.5
+01A3:  MOVF   20,W
+01A4:  IORWF  0B,F
+01A5:  INCF   47,F
+01A6:  GOTO   18B
+....................         #endif  
+....................         write_eeprom(127,qtoc);   //salva numero de toc-tocs  
+01A7:  MOVLW  7F
+01A8:  BSF    03.5
+01A9:  MOVWF  1B
+01AA:  BCF    03.5
+01AB:  MOVF   44,W
+01AC:  BSF    03.5
+01AD:  MOVWF  1A
+01AE:  BSF    1C.2
+01AF:  BCF    03.5
+01B0:  MOVF   0B,W
+01B1:  MOVWF  20
+01B2:  BCF    0B.7
+01B3:  BSF    03.5
+01B4:  MOVLW  55
+01B5:  MOVWF  1D
+01B6:  MOVLW  AA
+01B7:  MOVWF  1D
+01B8:  BSF    1C.1
+01B9:  BTFSC  1C.1
+01BA:  GOTO   1B9
+01BB:  BCF    1C.2
+01BC:  BCF    03.5
+01BD:  MOVF   20,W
+01BE:  IORWF  0B,F
+....................         for(a=0;a<=qtoc;a++){ //ok  
+01BF:  CLRF   47
+01C0:  MOVF   47,W
+01C1:  SUBWF  44,W
+01C2:  BTFSS  03.0
+01C3:  GOTO   1E3
+....................         write_eeprom(a,valor[a]);//salva na eeprom  
+01C4:  MOVLW  2E
+01C5:  ADDWF  47,W
+01C6:  MOVWF  04
+01C7:  MOVF   00,W
+01C8:  MOVWF  4E
+01C9:  MOVF   47,W
+01CA:  BSF    03.5
+01CB:  MOVWF  1B
+01CC:  BCF    03.5
+01CD:  MOVF   4E,W
+01CE:  BSF    03.5
+01CF:  MOVWF  1A
+01D0:  BSF    1C.2
+01D1:  BCF    03.5
+01D2:  MOVF   0B,W
+01D3:  MOVWF  20
+01D4:  BCF    0B.7
+01D5:  BSF    03.5
+01D6:  MOVLW  55
+01D7:  MOVWF  1D
+01D8:  MOVLW  AA
+01D9:  MOVWF  1D
+01DA:  BSF    1C.1
+01DB:  BTFSC  1C.1
+01DC:  GOTO   1DB
+01DD:  BCF    1C.2
+01DE:  BCF    03.5
+01DF:  MOVF   20,W
+01E0:  IORWF  0B,F
+....................         }  
+01E1:  INCF   47,F
+01E2:  GOTO   1C0
+....................          led_gr=0;//sai do modo de programação  
+01E3:  BCF    05.4
+....................          qtoc=0;  
+01E4:  CLRF   44
+....................        }  
+....................        else{ //rotina que fara a comparação das batidas  
+01E5:  GOTO   259
+....................   
+.................... //-------------------------------------------------------------------------------  
+....................        #ifdef teste  
+....................         for(a=0;a<=20;a++){  
+....................            write_eeprom(a+32,0xff);//apaga  
+....................          }  
+....................   
+....................         for(a=0;a<=qtoc;a++){  
+....................            write_eeprom(a+32,valor[a]);  
+....................          }  
+....................        #endif  
+.................... //-----------------------------------------------------------------------------  
+....................           z=0;  
+01E6:  CLRF   48
+....................           for(a=0;a<qtoc;a++){//estava a<=qtoc  
+01E7:  CLRF   47
+01E8:  MOVF   44,W
+01E9:  SUBWF  47,W
+01EA:  BTFSC  03.0
+01EB:  GOTO   236
+....................            x=read_eeprom(a);  
+01EC:  MOVF   47,W
+01ED:  BSF    03.5
+01EE:  MOVWF  1B
+01EF:  BCF    1C.7
+01F0:  BSF    1C.0
+01F1:  MOVF   1A,W
+01F2:  BCF    03.5
+01F3:  CLRF   23
+01F4:  MOVWF  4A
+01F5:  MOVF   23,W
+01F6:  MOVWF  4B
+....................            y=valor[a];  
+01F7:  MOVLW  2E
+01F8:  ADDWF  47,W
+01F9:  MOVWF  04
+01FA:  MOVF   00,W
+01FB:  CLRF   23
+01FC:  MOVWF  4C
+01FD:  MOVF   23,W
+01FE:  MOVWF  4D
+....................            if((y<=x+TOLERANCIA) && (y>=x-TOLERANCIA))z++;  
+01FF:  MOVLW  0A
+0200:  ADDWF  4A,W
+0201:  MOVWF  21
+0202:  MOVF   4B,W
+0203:  MOVWF  23
+0204:  BTFSC  03.0
+0205:  INCF   23,F
+0206:  MOVF   21,W
+0207:  BTFSS  4D.7
+0208:  GOTO   20C
+0209:  BTFSS  23.7
+020A:  GOTO   218
+020B:  GOTO   20E
+020C:  BTFSC  23.7
+020D:  GOTO   234
+020E:  MOVF   4D,W
+020F:  SUBWF  23,W
+0210:  BTFSS  03.0
+0211:  GOTO   234
+0212:  BTFSS  03.2
+0213:  GOTO   218
+0214:  MOVF   4C,W
+0215:  SUBWF  21,W
+0216:  BTFSS  03.0
+0217:  GOTO   234
+0218:  MOVLW  0A
+0219:  SUBWF  4A,W
+021A:  MOVWF  20
+021B:  MOVF   4B,W
+021C:  MOVWF  23
+021D:  MOVLW  00
+021E:  BTFSS  03.0
+021F:  MOVLW  01
+0220:  SUBWF  23,F
+0221:  MOVF   20,W
+0222:  MOVWF  21
+0223:  BTFSS  23.7
+0224:  GOTO   228
+0225:  BTFSS  4D.7
+0226:  GOTO   233
+0227:  GOTO   22A
+0228:  BTFSC  4D.7
+0229:  GOTO   234
+022A:  MOVF   23,W
+022B:  SUBWF  4D,W
+022C:  BTFSS  03.0
+022D:  GOTO   234
+022E:  BTFSS  03.2
+022F:  GOTO   233
+0230:  MOVF   21,W
+0231:  SUBWF  4C,W
+0232:  BTFSC  03.0
+0233:  INCF   48,F
+....................           }  
+0234:  INCF   47,F
+0235:  GOTO   1E8
+.................... //-----------------------------------------------------------------------------  
+....................        #ifdef teste  
+....................          write_eeprom(90,a);//testes apenas  
+....................          write_eeprom(91,z);  
+....................        #endif  
+.................... //------------------------------------------------------------------------------  
+....................   
+....................          if((a==z)&& (read_eeprom(127)==a)){//compara se toc foram aceitos e o número correto de tocs  
+0236:  MOVF   48,W
+0237:  SUBWF  47,W
+0238:  BTFSS  03.2
+0239:  GOTO   259
+023A:  MOVLW  7F
+023B:  BSF    03.5
+023C:  MOVWF  1B
+023D:  BCF    1C.7
+023E:  BSF    1C.0
+023F:  MOVF   1A,W
+0240:  BCF    03.5
+0241:  SUBWF  47,W
+0242:  BTFSS  03.2
+0243:  GOTO   259
+....................   
+....................           #ifdef SAIDA_PULSO  
+....................           //modo pulso  
+....................           rele=1;//ativa rele  
+0244:  BSF    05.5
+....................           som();  
+0245:  GOTO   091
+....................           delay_ms(TEMPO_RELE_LIGADO);  
+0246:  MOVLW  14
+0247:  MOVWF  4E
+0248:  MOVLW  FA
+0249:  MOVWF  4F
+024A:  CALL   04B
+024B:  DECFSZ 4E,F
+024C:  GOTO   248
+....................           rele=0;//desativa rele  
+024D:  BCF    05.5
+....................           #else  
+....................           //modo retenção  
+....................           rele=!rele; //inverte a saída  
+....................           som();  
+....................           #endif  
+....................             
+....................           for(a=0;a<20;a++)valor[a]=0;//apaga ultima entrada da senha de toc-toc  
+024E:  CLRF   47
+024F:  MOVF   47,W
+0250:  SUBLW  13
+0251:  BTFSS  03.0
+0252:  GOTO   259
+0253:  MOVLW  2E
+0254:  ADDWF  47,W
+0255:  MOVWF  04
+0256:  CLRF   00
+0257:  INCF   47,F
+0258:  GOTO   24F
+....................          }  
+....................           
+....................   
+....................      }//else compara  
+....................     }//if(qtoc)  
+....................         tmr1u=0;  
+0259:  CLRF   43
+....................         tmr1l=0;  
+025A:  CLRF   0E
+....................         tmr1h=0;  
+025B:  CLRF   0F
+....................         f_tmax=0;  
+025C:  BCF    45.0
+....................         qtoc=0;//reseta  
+025D:  CLRF   44
+....................    }//else  
+....................   
+....................    }//for(;;)  
+025E:  GOTO   15B
+.................... }//main()  
+....................  
+025F:  SLEEP
+
+Configuration Fuses:
+   Word  1: 3994   NOWDT NOCPD NOPROTECT NOMCLR NOPUT INTRC_IO NOBROWNOUT
